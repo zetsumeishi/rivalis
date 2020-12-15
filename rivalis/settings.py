@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Rivalis
     'www.apps.WwwConfig',
     # Packages
+    'django_extensions',
     'django_cleanup.apps.CleanupConfig',
 ]
 
