@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Rivalis
     'www.apps.WwwConfig',
+    # Packages
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
