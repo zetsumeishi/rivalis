@@ -45,8 +45,6 @@ class UsersViewsTests(TestCase):
         self.assertTemplateUsed(response, 'users/profile.html')
         self.assertEqual(response.context['user'], self.player)
         self.assertTrue(response.context['form'])
-        self.assertFalse(response.context['teams'])
-        self.assertFalse(response.context['organization'])
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'Profile updated successfully')
 

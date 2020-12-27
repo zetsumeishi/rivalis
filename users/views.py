@@ -7,7 +7,6 @@ from django.shortcuts import render
 from .forms import ProfileForm
 from .forms import UserCreationForm
 from .models import User
-from organizations.models import Organization
 
 
 @login_required
@@ -36,8 +35,6 @@ def profile(request):
         'timezone': request.user.timezone,
     }
     context['form'] = ProfileForm(initial=form_data)
-    context['organization'] = Organization.objects.filter(owner=request.user).first()
-    context['teams'] = request.user.team_set.all()
     return render(request, 'users/profile.html', context)
 
 
