@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Rivalis
     'www.apps.WwwConfig',
+    'users.apps.UsersConfig',
     # Packages
     'django_extensions',
     'django_cleanup.apps.CleanupConfig',
@@ -104,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = 'users:login'
 
 LOGIN_REDIRECT_URL = 'www:home'
 
