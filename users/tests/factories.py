@@ -8,6 +8,7 @@ from faker import Faker
 from users.constants import TIMEZONES
 
 fake = Faker()
+timezones = [tz[0] for tz in TIMEZONES]
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -25,7 +26,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     email = factory.Sequence(lambda n: f'player{n}@rivalis.gg')
     riot_id = username
     riot_tag = f'#{random.randint(100, 999)}'
-    timezone = factory.fuzzy.FuzzyChoice(TIMEZONES)
+    timezone = factory.fuzzy.FuzzyChoice(timezones)
 
 
 class StaffFactory(UserFactory):
