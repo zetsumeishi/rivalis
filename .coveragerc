@@ -3,3 +3,5 @@ source = .
 omit =
     .env/*
     home
+    rivalis/*
+    manage.py
