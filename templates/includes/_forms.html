@@ -1,0 +1,13 @@
+{% load static %}
+{% load i18n %}
+
+{% for field in form %}
+<div class="form-group">
+  <div class="mx-auto">
+    <label for="{{ field.id_for_label }}">{% trans field.label %}</label>
+  </div>
+  <div class="mx-auto">
+    {{ field }}
+  </div>
+</div>
+{% endfor %}
