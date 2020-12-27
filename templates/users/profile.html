@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'includes/_forms.html' %}
+    <input type="submit" value="Save">
+  </form>
+  {% if organization %}
+    <hr>
+    <h1><a href="{% url 'organizations:detail_organization' organization.slug %}">{{ organization.name }}</a></h1>
+  {% endif %}
+  {% if teams %}
+    <hr>
+    {% for team in teams %}
+      <h2><a href="{% url 'organizations:detail_team' team.organization.slug team.slug %}">{{ team.name }} | {{ team.short_name }}</a></h2>
+      <p>{{ team.discipline }}</p>
+      <ul>
+        {% for member in team.members.all %}
+          <li>{{ member.email }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock %}
