@@ -18,10 +18,7 @@ class UsersViewsTests(TestCase):
         # [GET] AnonymousUser
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response['location'],
-            '/accounts/login/?next=/my-account/profile/',
-        )
+        self.assertEqual(response['location'], '/login/?next=/profile/')
 
         # [GET] Authenticated User
         self.client.force_login(self.player)
