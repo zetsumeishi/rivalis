@@ -8,7 +8,7 @@ install:
 
 script:
   - ./clean_project.sh
-  - coverage run -m manage test --settings="rivalis.tests_settings"
+  - coverage run -m manage test
 
 after_success:
   - coveralls
