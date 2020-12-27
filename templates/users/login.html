@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
 
+{% block title %}
+  Log In
+{% endblock %}
+
 {% block content %}
-
-<div class="container">
-  <div class="card">
-    <div class="card-title">
-      Log in
+  <div class="container">
+    <div class="card">
+      <div class="card-title">
+        Log in
+      </div>
+      <div class="card-body">
+        <form action="{% url 'users:login' %}" method="post">
+          {% csrf_token %}
+          {% include 'includes/_forms.html' %}
+          <input type="submit" value="Log in">
+        </form>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'users:signup' %}">Sign up ?</a>
+      </div>
     </div>
-    <div class="card-body">
-      <form action="{% url 'users:login' %}" method="post">
-        {% csrf_token %}
-        {% include 'includes/_forms.html' %}
-        <input type="submit" value="Log in">
-      </form>
-    </div>
-    <div class="card-footer">
-      <a href="{% url 'users:signup' %}">Sign up ?</a>
-    </div>
+    <p><a href="{% url 'users:password_reset' %}">Lost password ?</a></p>
   </div>
-  <p><a href="{% url 'users:password_reset' %}">Lost password ?</a></p>
-</div>
-
 {% endblock %}
