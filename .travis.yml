@@ -1,0 +1,14 @@
+language: python
+python: 3.8
+
+sudo: required
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - ./clean_project.sh
+  - coverage run -m manage test --settings="rivalis.tests_settings"
+
+after_success:
+  - coveralls
