@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Open+Sans:wght@300;400;600;700&display=swap');
+@import "includes/mixins";
+
+body {
+  font-size: 16px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+}
+
+@import "includes/variables";
+@import "includes/navbar";
+@import "home";

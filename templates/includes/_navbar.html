@@ -1,15 +1,23 @@
 {% load tz %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
   <div class="container">
-  <a class="navbar-brand" href="#">Rivalis</a>
+  <a class="navbar-brand" href="{% url 'www:home' %}">RIVALIS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav me-auto ml-3 mb-2 mb-lg-0">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{% url 'www:home' %}">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Organizations
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-link active" aria-current="page" href="{% url 'organizations:create_organization' %}">Create an organization</a>
+        </div>
       </li>
       {% if request.user.is_authenticated %}
       <li class="nav-item">
@@ -28,28 +36,27 @@
       {% endif %}
     </ul>
     <div class="ml-auto">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul id="social-links" class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
         <li class="nav-item">
-          <a class="nav-link" href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+          <a class="nav-link" href="https://www.discord.com"><i class="fab fa-discord fa-2x"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+          <a class="nav-link" href="https://www.youtube.com"><i class="fab fa-youtube fa-2x"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://www.twitch.com"><i class="fab fa-twitch"></i></a>
+          <a class="nav-link" href="https://www.twitter.com"><i class="fab fa-twitter fa-2x"></i></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="https://www.twitch.com"><i class="fab fa-twitch fa-2x"></i></a>
+        </li>
+        <li class="nav-item ml-5">
           {% if request.user.is_authenticated %}
             {% timezone request.user.timezone %}
-            <span class="nav-link">
-              {% now "H:i" %}
-            </span>
+              <strong>User time:</strong> <span class="badge badge-dark nav-link">{% now "H:i" %}</span>
             {% endtimezone %}
           {% else %}
             {% timezone 'UTC'%}
-            <span class="nav-link">
-              {% now "H:i" %}
-            </span>
+              <strong>Server time:</strong> <span class="badge badge-dark">{% now "H:i" %}</span>
             {% endtimezone %}
           {% endif %}
         </li>
