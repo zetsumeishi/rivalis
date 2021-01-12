@@ -16,7 +16,9 @@
           Organizations
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="nav-link active" aria-current="page" href="{% url 'organizations:create_organization' %}">Create an organization</a>
+          <a class="dropdown-item" aria-current="page" href="{% url 'organizations:create_organization' %}">Create an organization</a>
+          <span class="dropdown-item">My teams</span>
+          <div class="dropdown-divider"></div>
         </div>
       </li>
       {% if request.user.is_authenticated %}
