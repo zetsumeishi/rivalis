@@ -10,7 +10,7 @@ class UsersManagersTests(TestCase):
 
     def setUp(self):
         self.User = get_user_model()
-        self.password = 'password'
+        self.password = 'KQ3aiBM(=+9='
 
     def test_create_user(self):
         """Tests for users.managers.create_user"""

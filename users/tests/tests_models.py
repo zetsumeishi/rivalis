@@ -11,7 +11,9 @@ class UsersModelsTests(TestCase):
     """
 
     def setUp(self):
-        self.player = UserFactory()
+        self.player = UserFactory(email='player@rivalis.gg')
 
-    def tests_user(self):
-        self.assertEqual(self.player.__str__(), 'player0@rivalis.gg')
+    def tests_user_model(self):
+        """Tests for users.models.User methods"""
+
+        self.assertEqual(self.player.__str__(), 'player@rivalis.gg')

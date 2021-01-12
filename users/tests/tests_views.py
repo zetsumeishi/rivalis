@@ -10,7 +10,11 @@ class UsersViewsTests(TestCase):
     """Tests for users.views"""
 
     def setUp(self):
-        self.player = UserFactory()
+        self.player = UserFactory(
+            email='spawn@rivalis.gg',
+            username='spawn',
+            timezone='Europe/Tallinn',
+        )
         self.player_to_delete = UserFactory()
         self.User = get_user_model()
 
