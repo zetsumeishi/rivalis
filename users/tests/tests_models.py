@@ -4,6 +4,12 @@ from users.tests.factories import UserFactory
 
 
 class UsersModelsTests(TestCase):
+    """Tests for users.models
+
+    models:
+        - User(AbstractUser)
+    """
+
     def setUp(self):
         self.player = UserFactory()
 
