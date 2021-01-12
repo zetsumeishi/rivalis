@@ -2,6 +2,11 @@
 body {
   font-size: 16px;
   font-family: "Open Sans", Helvetica, sans-serif;
+  background-color: #ededed;
+}
+
+input {
+  width: 100%;
 }
 
 nav.navbar {
