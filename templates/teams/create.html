@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Create a team
+{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-title">
+      Create a team
+    </div>
+    <div class="card-body">
+      <form action="{% url 'organizations:create_team' %}" method="post">
+        {% csrf_token %}
+        {% include 'includes/_forms.html' %}
+        <input type="submit" value="Create">
+      </form>
+    </div>
+  </div>
+{% endblock %}

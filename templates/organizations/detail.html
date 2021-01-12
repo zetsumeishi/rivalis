@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ organization.name }}
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1>{{ organization.name }}</h1>
+    <ul>
+      <li>{{ organization.description }}</li>
+      <li>{{ organization.twitch }}</li>
+    </ul>
+  </div>
+
+  {% if request.user == organization.owner %}
+    <button type="button" name="button">
+      <a href="{% url 'organizations:create_team' %}">Create Team</a>
+    </button>
+  {% endif %}
+
+  {% if teams %}
+    {% for team in teams %}
+      <h2><a href="{% url 'organizations:detail_team' team.organization.slug team.slug %}">{{ team.name }}</a> | {{ team.short_name }}</h2>
+      <p>{{ team.discipline }}</p>
+      <ul>
+      {% for member in team.members.all %}
+          <li>{{ member.email }}</li>
+      {% endfor %}
+      </ul>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
