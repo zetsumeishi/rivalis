@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Rivalis
     'www.apps.WwwConfig',
     'users.apps.UsersConfig',
+    'organizations.apps.OrganizationsConfig',
     'disciplines.apps.DisciplinesConfig',
     # Packages
     'django_extensions',
