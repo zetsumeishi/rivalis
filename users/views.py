@@ -121,4 +121,9 @@ def delete_account(request):
     user. Once we deleted the account, the user is redirected to the home.
     """
     request.user.delete()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        'Your account has been successfully deleted. We are sorry to see you go.',
+    )
     return HttpResponseRedirect('/')
