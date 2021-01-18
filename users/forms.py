@@ -1,7 +1,9 @@
+from django import forms
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ImageField
-from django.forms import ModelForm
 from django.forms import widgets
 from django.utils.safestring import mark_safe
 
@@ -20,6 +22,16 @@ class UserCreationForm(UserCreationForm):
         model = User
         fields = ['email', 'username', 'timezone']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].help_text = None
+        self.fields['email'].widget.attrs.update({'placeholder': 'Email'})
+        self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
+        self.fields['password2'].widget.attrs.update(
+            {'placeholder': 'Confirm password'},
+        )
+
 
 class UserChangeForm(UserChangeForm):
     class Meta:
@@ -27,7 +39,25 @@ class UserChangeForm(UserChangeForm):
         fields = ['email', 'username', 'avatar']
 
 
-class ProfileForm(ModelForm):
+class PasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs.update({'placeholder': 'Old password'})
+        self.fields['new_password1'].widget.attrs.update(
+            {'placeholder': 'New password'},
+        )
+        self.fields['new_password2'].widget.attrs.update(
+            {'placeholder': 'Confirm new password'},
+        )
+
+
+class PasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'placeholder': 'Email'})
+
+
+class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['email', 'username', 'avatar', 'timezone']

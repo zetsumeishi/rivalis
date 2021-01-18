@@ -2,6 +2,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from . import views
+from .forms import PasswordChangeForm
+from .forms import PasswordResetForm
 
 app_name = 'users'
 
@@ -20,6 +22,8 @@ urlpatterns = [
         'password-change/',
         auth_views.PasswordChangeView.as_view(
             template_name='users/password_change.html',
+            form_class=PasswordChangeForm,
+            success_url='/',
         ),
         name='password_change',
     ),
@@ -32,7 +36,13 @@ urlpatterns = [
     ),
     path(
         'password-reset/',
-        auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),
+        auth_views.PasswordResetView.as_view(
+            template_name='users/password_reset.html',
+            email_template_name='users/password_reset_email.html',
+            subject_template_name='users/password_reset_subject.txt',
+            form_class=PasswordResetForm,
+            success_url='/',
+        ),
         name='password_reset',
     ),
     path(
