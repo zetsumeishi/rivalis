@@ -1,12 +1,46 @@
-<div class="col-6 offset-3">
-  <h2>MY PROFILE</h2>
-  <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% include 'includes/_forms.html' %}
-    <input type="submit" value="Save">
-  </form>
-  {% if organization %}
-    <hr>
-    <h1><a href="{% url 'organizations:detail_organization' organization.slug %}">{{ organization.name }}</a></h1>
-  {% endif %}
-</div>
+<form action="{% url 'users:edit_profile' %}" method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-2">
+      {{ form.avatar }}
+    </div>
+    <div class="col-5">
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      {{ form.username }}
+    </div>
+    <div class="col-5">
+      <label for="{{ form.email.id_for_label }}">Email</label>
+      {{ form.email }}
+    </div>
+    <div class="col-3 offset-2">
+      <label for="{{ form.riot_id.id_for_label }}">Riot ID</label>
+      {{ form.riot_id }}
+    </div>
+    <div class="col-2">
+      <label for="{{ form.riot_tag.id_for_label }}">Riot tag</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        {{ form.riot_tag }}
+      </div>
+    </div>
+    <div class="col-5">
+      <label for="{{ form.timezone.id_for_label }}">Timezone</label>
+      {{ form.timezone }}
+    </div>
+    <div class="col-2 offset-10 mt-4">
+      <button class="btn btn-md rivalis-button-primary w-100 mb-3">Save</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+<!-- {% if form.username.help_text %}
+<p class="help">{{ form.username.help_text|safe }}</p>
+{% endif %}
+{% if form.username.errors %}
+<p>{{ form.username.errors }}</p>
+{% endif %} -->
