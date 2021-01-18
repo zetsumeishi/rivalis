@@ -4,9 +4,44 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import ProfileForm
+from .forms import EditProfileForm
 from .forms import UserCreationForm
 from .models import User
+
+
+@login_required
+def edit_profile(request):
+    """User profile view
+
+    This view is used for handling GET and POST request to display and update the
+    user.
+    """
+    context = dict()
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Profile updated successfully',
+            )
+            return render(request, 'users/profile.html', context)
+        else:
+            messages.add_message(request, messages.ERROR, 'Mistakes were made')
+
+    form_data = {
+        'email': request.user.email,
+        'username': request.user.username,
+        'avatar': request.user.avatar,
+        'timezone': request.user.timezone,
+        'riot_id': request.user.riot_id,
+        'riot_tag': request.user.riot_tag,
+    }
+    context = {
+        'form': EditProfileForm(initial=form_data),
+    }
+    return render(request, 'users/edit_profile.html', context)
 
 
 @login_required
@@ -16,25 +51,10 @@ def profile(request):
     This view is used for handling GET and POST request to display and update the
     user.
     """
-    context = dict()
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                'Profile updated successfully',
-            )
-        else:
-            messages.add_message(request, messages.ERROR, 'Mistakes were made')
-    form_data = {
-        'email': request.user.email,
-        'username': request.user.username,
-        'avatar': request.user.avatar,
-        'timezone': request.user.timezone,
+    context = {
+        'teams': request.user.team_set.all(),
     }
-    context['form'] = ProfileForm(initial=form_data)
+
     return render(request, 'users/profile.html', context)
 
 
