@@ -65,7 +65,14 @@ class PasswordResetForm(PasswordResetForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'username', 'avatar', 'timezone']
+        fields = ['email', 'username', 'timezone', 'riot_id', 'riot_tag', 'avatar']
         exclude = ['password']
 
     avatar = forms.ImageField(widget=AvatarWidget)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['timezone'].widget.attrs.update({'class': 'w-100'})
+        self.fields['riot_tag'].widget.attrs.update(
+            {'class': 'form-control', 'id': 'inlineFormInputGroup'},
+        )
