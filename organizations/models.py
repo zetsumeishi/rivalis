@@ -12,6 +12,11 @@ class Organization(models.Model):
     is_business = models.BooleanField(default=False)
     twitch = models.URLField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    logo = models.ImageField(
+        'Logo',
+        upload_to='organizations/',
+        default='/organizations/default_logo.png',
+    )
 
     def __str__(self):
         return self.name
@@ -23,6 +28,11 @@ class Team(models.Model):
     members = models.ManyToManyField(User, through='TeamMembership')
     discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    logo = models.ImageField(
+        'Logo',
+        upload_to='organizations/',
+        default='/organizations/default_logo.png',
+    )
 
     def __str__(self):
         return self.name
