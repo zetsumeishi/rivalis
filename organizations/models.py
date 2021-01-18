@@ -5,12 +5,12 @@ from users.models import User
 
 
 class Organization(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.CharField(max_length=255)
-    short_name = models.CharField(max_length=255)
-    description = models.TextField()
+    name = models.CharField('Name', max_length=255)
+    slug = models.CharField('Slug', max_length=255)
+    short_name = models.CharField('Short name', max_length=255)
+    description = models.TextField('Description')
     is_business = models.BooleanField(default=False)
-    twitch = models.URLField()
+    twitch = models.URLField('Twitch')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(
         'Logo',
