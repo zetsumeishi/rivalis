@@ -115,6 +115,33 @@ class UsersViewsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(self.User.objects.get(email=email))
 
+    def tests_log_in(self):
+        """Tests for users.views.log_in"""
+
+        url = reverse('users:log_in')
+        email = 'spawn@rivalis.gg'
+        password = 'KQ3aiBM(=+9='
+
+        # [GET] Login page
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        # [POST] Connection with the wrong password
+        payload = {
+            'email': email,
+            'password': 'password',
+        }
+        response = self.client.post(url, payload)
+
+        self.assertEqual(response.status_code, 302)
+
+        # [POST] Connection with the correct credentials
+        payload.update(password=password)
+        response = self.client.post(url, payload)
+
+        self.assertEqual(response.status_code, 302)
+
     def tests_delete_account(self):
         """Tests for users.views.delete_account"""
 
