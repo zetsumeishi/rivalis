@@ -2,68 +2,66 @@
 
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-  <a class="navbar-brand" href="{% url 'www:home' %}">RIVALIS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav me-auto ml-3 mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{% url 'www:home' %}">Home</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Organizations
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" aria-current="page" href="{% url 'organizations:create_organization' %}">Create an organization</a>
-          <span class="dropdown-item">My teams</span>
-          <div class="dropdown-divider"></div>
-        </div>
-      </li>
-      {% if request.user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'users:profile' %}">My Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'users:logout' %}">Log Out</a>
-      </li>
-      {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'users:login' %}">Log In</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'users:signup' %}">Sign Up</a>
-      </li>
-      {% endif %}
-    </ul>
-    <div class="ml-auto">
-      <ul id="social-links" class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+    <a class="navbar-brand" href="{% url 'www:home' %}">RIVALIS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto ml-3 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="https://www.discord.com"><i class="fab fa-discord fa-2x"></i></a>
+          <a class="nav-link active" aria-current="page" href="{% url 'www:home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://www.youtube.com"><i class="fab fa-youtube fa-2x"></i></a>
+          <a class="nav-link active" aria-current="page" href="{% url 'tournaments:tournaments' %}">Tournaments</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Create
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" aria-current="page" href="#">
+              Create a tournament
+            </a>
+            <a class="dropdown-item" aria-current="page" href="{% url 'organizations:create_organization' %}">
+              Create an organization
+            </a>
+            <a class="dropdown-item" aria-current="page" href="{% url 'organizations:create_team' %}">
+              Create a team
+            </a>
+          </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://www.twitter.com"><i class="fab fa-twitter fa-2x"></i></a>
+          <a class="nav-link" href="{% url 'users:profile' %}">My Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://www.twitch.com"><i class="fab fa-twitch fa-2x"></i></a>
+          <a class="nav-link" href="{% url 'users:logout' %}">Log Out</a>
         </li>
-        <li class="nav-item ml-5">
-          {% if request.user.is_authenticated %}
-            {% timezone request.user.timezone %}
-              <strong>User time:</strong> <span class="badge badge-dark nav-link">{% now "H:i" %}</span>
-            {% endtimezone %}
-          {% else %}
-            {% timezone 'UTC'%}
-              <strong>Server time:</strong> <span class="badge badge-dark">{% now "H:i" %}</span>
-            {% endtimezone %}
-          {% endif %}
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:log_in' %}">Log In</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:sign_up' %}">Sign Up</a>
+        </li>
+        {% endif %}
       </ul>
+      <div class="ml-auto">
+        <ul id="social-links" class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.discord.com"><i class="fab fa-discord fa-2x"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.youtube.com"><i class="fab fa-youtube fa-2x"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.twitter.com"><i class="fab fa-twitter fa-2x"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.twitch.com"><i class="fab fa-twitch fa-2x"></i></a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </nav>
