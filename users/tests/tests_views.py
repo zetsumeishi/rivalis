@@ -12,8 +12,11 @@ class UsersViewsTests(TestCase):
     def setUp(self):
         self.player = UserFactory(
             email='spawn@rivalis.gg',
+            password='KQ3aiBM(=+9=',
             username='spawn',
             timezone='Europe/Tallinn',
+            riot_id='SpawN',
+            riot_tag='#123',
         )
         self.player_to_delete = UserFactory()
         self.User = get_user_model()
@@ -37,11 +40,22 @@ class UsersViewsTests(TestCase):
         self.assertTemplateUsed(response, 'users/profile.html')
         self.assertContains(response, self.player.email)
 
+        self.client.logout()
+
+    def tests_edit_profile(self):
+        """Tests for users.views.edit_profile"""
+
+        url = reverse('users:edit_profile')
+        self.client.force_login(self.player)
+
         # [POST] Changing the username and the timezone
         payload = {
             'email': self.player.email,
             'timezone': 'Europe/Stockholm',
             'username': 'SpawN',
+            'riot_id': 'SpawN',
+            'riot_tag': '#123',
+            'avatar': '/avatars/default.png',
         }
         response = self.client.post(url, payload)
         messages = list(response.context['messages'])
@@ -52,7 +66,6 @@ class UsersViewsTests(TestCase):
         self.assertEqual(self.player.timezone, 'Europe/Stockholm')
         self.assertTemplateUsed(response, 'users/profile.html')
         self.assertEqual(response.context['user'], self.player)
-        self.assertTrue(response.context['form'])
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'Profile updated successfully')
 
@@ -68,16 +81,16 @@ class UsersViewsTests(TestCase):
 
         self.client.logout()
 
-    def tests_signup(self):
-        """Tests for users.views.signup"""
+    def tests_sign_up(self):
+        """Tests for users.views.sign_up"""
 
-        url = reverse('users:signup')
+        url = reverse('users:sign_up')
         email = 'heaton@rivalis.gg'
         password = 'KQ3aiBM(=+9='
         username = 'HeatoN'
         timezone = 'Europe/Stockholm'
 
-        # [GET] Rendering the signup form
+        # [GET] Rendering the sign_up form
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
@@ -91,6 +104,7 @@ class UsersViewsTests(TestCase):
             'timezone': timezone,
         }
         response = self.client.post(url, payload, follow=True)
+
         with self.assertRaises(ObjectDoesNotExist):
             self.User.objects.get(email=email)
 
