@@ -6,6 +6,7 @@ from slugify import slugify
 from organizations.models import Organization
 from organizations.models import Team
 from organizations.models import TeamMembership
+from users.tests.factories import UserFactory
 
 
 class OrganizationFactory(DjangoModelFactory):
@@ -40,7 +41,7 @@ class TeamFactory(DjangoModelFactory):
             return
 
         if extracted:
-            # A list of groups were passed in, use them
+            # A list of members were passed in, use them
             for member in extracted:
                 self.members.add(member)
 
@@ -53,3 +54,10 @@ class TeamMembershipFactory(DjangoModelFactory):
     role = 'player'
     user = factory.SubFactory('users.tests.factories.UserFactory')
     team = factory.SubFactory('organizations.tests.factories.TeamFactory')
+
+
+class UserWithTeamFactory(UserFactory):
+    membership = factory.RelatedFactory(
+        TeamMembershipFactory,
+        factory_related_name='user',
+    )
