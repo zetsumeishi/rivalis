@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'users.User'
 
-LOGIN_URL = 'users:login'
+LOGIN_URL = 'users:log_in'
 
 LOGIN_REDIRECT_URL = 'www:home'
 
