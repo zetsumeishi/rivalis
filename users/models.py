@@ -16,7 +16,7 @@ class User(AbstractUser):
         timezone: Datetime object used to display the right date and time to the user
     """
 
-    email = models.EmailField('email address', unique=True)
+    email = models.EmailField('Email', unique=True)
     riot_id = models.CharField('Riot ID', max_length=255, null=True)
     riot_tag = models.CharField('Riot Tag (#)', max_length=255, null=True)
     avatar = models.ImageField(
