@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'organizations.apps.OrganizationsConfig',
     'disciplines.apps.DisciplinesConfig',
     # Packages
-    'django_extensions',
-    'django_cleanup.apps.CleanupConfig',
+    'django_cleanup.apps.CleanupConfig',  # PROD
+    'django_extensions',  # DEV
 ]
 
 MIDDLEWARE = [
