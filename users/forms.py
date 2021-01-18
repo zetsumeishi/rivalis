@@ -3,6 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
+from django.core import validators
 from django.utils.safestring import mark_safe
 
 from .models import User
@@ -20,6 +21,20 @@ class AvatarWidget(forms.widgets.FileInput):
             f'<img src="{value.url}" class="w-100" id="current-avatar"/>',
         )
         return f'{img_html}{input_html}'
+
+
+class UserAuthenticationForm(forms.Form):
+    email = forms.EmailField(
+        validators=[validators.validate_email],
+        widget=forms.EmailInput(attrs={'placeholder': 'Email'}),
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].help_text = None
 
 
 class UserCreationForm(UserCreationForm):
