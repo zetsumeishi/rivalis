@@ -1,0 +1,96 @@
+// Forms
+input[type='text'],
+input[type='password'],
+input[name='email'],
+select {
+  color: $dark-grey;
+  padding: 0 1em;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  height: 50px;
+  width: 100%;
+
+  &:focus {
+    box-shadow: none;
+    border: $border-light-primary;
+  }
+}
+
+label {
+  font-size: 1.1em;
+  font-weight: bolder;
+  color: $dark-grey;
+}
+
+select {
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+}
+
+// Buttons
+
+%rivalis-button {
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: $border-light-primary;
+  background-color: $primary-color;
+  transition: color 0.5s, background-color 0.5s;
+  // button[type='submit']
+  &:hover {
+    color: $primary-color !important;
+    background-color: white;
+  }
+  // Button with link
+  & > a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.rivalis-button-primary {
+  @extend %rivalis-button;
+}
+
+.rivalis-button-red {
+  @extend %rivalis-button;
+  border: $border-light-red;
+  background-color: $red;
+  &:hover {
+    color: $red !important;
+    background-color: white;
+  }
+}
+// Cards -> Forms
+
+.card-form {
+  border-radius: 0.5em;
+
+  & > .card-title {
+    border-radius: 0.5em 0.5em 0 0;
+
+    & > .title-text {
+      color: $primary-color;
+      font-weight: bolder;
+      font-size: 1.5em;
+      text-transform: uppercase;
+    }
+  }
+
+  & > .card-body {
+    & > form {
+      & .fieldWrapper {
+        margin: 15px 0;
+
+        & > select {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  & > .card-footer {
+    background: none;
+  }
+}

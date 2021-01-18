@@ -1,12 +1,89 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Open+Sans:wght@300;400;600;700&display=swap");
 body {
   font-size: 16px;
   font-family: "Open Sans", Helvetica, sans-serif;
   background-color: #ededed;
+  height: 100%;
+  color: #343a40;
+}
+
+ul {
+  list-style-type: none;
 }
 
 input {
   width: 100%;
+}
+input[type=file] {
+  display: none;
+}
+
+#current-avatar {
+  position: relative;
+  display: inline-block;
+}
+
+#current-avatar::before {
+  content: "📷";
+  z-index: 1000;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3px 15px 3px 25px;
+  color: white;
+  font-family: "FontAwesome";
+  font-size: 50px !important;
+  background-color: #172322;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.mt-85 {
+  margin-top: -85px;
+}
+
+.section-bg {
+  background-color: white;
+  border-radius: 5px;
+  padding: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.11);
+}
+
+h1,
+h2 {
+  letter-spacing: -0.1em;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: #343a40;
+}
+
+i.fa-discord {
+  color: #343a40;
+}
+i.fa-discord:hover {
+  color: #7289DA;
+}
+
+i.fa-youtube {
+  color: #343a40;
+}
+i.fa-youtube:hover {
+  color: #FF0000;
+}
+
+i.fa-twitter {
+  color: #343a40;
+}
+i.fa-twitter:hover {
+  color: #009DED;
+}
+
+i.fa-twitch {
+  color: #343a40;
+}
+i.fa-twitch:hover {
+  color: #9244FF;
 }
 
 nav.navbar {
@@ -16,12 +93,12 @@ nav.navbar {
   height: 85px;
   background-color: white;
 }
-nav.navbar #navbarText > ul > li > a {
+nav.navbar a {
   line-height: 1.5em;
   font-weight: 600;
   color: black;
 }
-nav.navbar #navbarText > ul > li > a:hover {
+nav.navbar a:hover {
   color: #9E51CF;
 }
 nav.navbar .navbar-brand {
@@ -29,32 +106,99 @@ nav.navbar .navbar-brand {
   font-family: "Josefin Sans", "Open Sans", sans-serif;
   color: #9E51CF;
 }
-nav.navbar .dropdown-menu {
-  width: 200px;
+
+footer {
+  background-color: #343a40;
 }
-nav.navbar ul#social-links i.fa-discord {
+footer a {
+  line-height: 1.5em;
+  font-weight: 600;
+  color: white;
+}
+footer a:hover {
+  color: #9E51CF;
+}
+footer i.fab {
+  color: white;
+}
+
+input[type=text],
+input[type=password],
+input[name=email],
+select {
+  color: #343a40;
+  padding: 0 1em;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  height: 50px;
+  width: 100%;
+}
+input[type=text]:focus,
+input[type=password]:focus,
+input[name=email]:focus,
+select:focus {
+  box-shadow: none;
+  border: 1px solid rgba(158, 81, 207, 0.5);
+}
+
+label {
+  font-size: 1.1em;
+  font-weight: bolder;
   color: #343a40;
 }
-nav.navbar ul#social-links i.fa-discord:hover {
-  color: #7289DA;
+
+select {
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: "";
 }
-nav.navbar ul#social-links i.fa-youtube {
-  color: #343a40;
+
+.rivalis-button-red, .rivalis-button-primary {
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid rgba(158, 81, 207, 0.5);
+  background-color: #9E51CF;
+  transition: color 0.5s, background-color 0.5s;
 }
-nav.navbar ul#social-links i.fa-youtube:hover {
-  color: #FF0000;
+.rivalis-button-red:hover, .rivalis-button-primary:hover {
+  color: #9E51CF !important;
+  background-color: white;
 }
-nav.navbar ul#social-links i.fa-twitter {
-  color: #343a40;
+.rivalis-button-red > a, .rivalis-button-primary > a {
+  color: white;
+  text-decoration: none;
 }
-nav.navbar ul#social-links i.fa-twitter:hover {
-  color: #009DED;
+
+.rivalis-button-red {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  background-color: #FF0000;
 }
-nav.navbar ul#social-links i.fa-twitch {
-  color: #343a40;
+.rivalis-button-red:hover {
+  color: #FF0000 !important;
+  background-color: white;
 }
-nav.navbar ul#social-links i.fa-twitch:hover {
-  color: #9244FF;
+
+.card-form {
+  border-radius: 0.5em;
+}
+.card-form > .card-title {
+  border-radius: 0.5em 0.5em 0 0;
+}
+.card-form > .card-title > .title-text {
+  color: #9E51CF;
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+.card-form > .card-body > form .fieldWrapper {
+  margin: 15px 0;
+}
+.card-form > .card-body > form .fieldWrapper > select {
+  width: 100%;
+}
+.card-form > .card-footer {
+  background: none;
 }
 
 .jumbotron {
