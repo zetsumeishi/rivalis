@@ -8,11 +8,7 @@ from .forms import PasswordResetForm
 app_name = 'users'
 
 urlpatterns = [
-    path(
-        'login/',
-        auth_views.LoginView.as_view(template_name='users/login.html'),
-        name='login',
-    ),
+    path('login/', views.log_in, name='log_in'),
     path(
         'logout/',
         auth_views.LogoutView.as_view(template_name='users/logout.html'),
@@ -53,11 +49,11 @@ urlpatterns = [
         name='password_reset_done',
     ),
     path(
-        'password-reset-confirm/',
+        'password-reset-confirm/<uidb64>/<token>/',
         auth_views.PasswordResetConfirmView.as_view(
             template_name='users/password_reset_confirm.html',
         ),
-        name='password_confirm',
+        name='password_reset_confirm',
     ),
     path(
         'password-reset-complete/',
@@ -66,7 +62,7 @@ urlpatterns = [
         ),
         name='password_complete',
     ),
-    path('signup/', views.signup, name='signup'),
+    path('sign_up/', views.sign_up, name='sign_up'),
     path('profile/', views.profile, name='profile'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
     path('delete-account/', views.delete_account, name='delete_account'),

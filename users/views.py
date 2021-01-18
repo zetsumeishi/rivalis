@@ -1,10 +1,12 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import EditProfileForm
+from .forms import UserAuthenticationForm
 from .forms import UserCreationForm
 from .models import User
 
@@ -58,14 +60,40 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
-def signup(request):
+def log_in(request):
     """User registration view
 
     This view is used for handling GET and POST request to display the sign up form and
     create the user. Once the account is created, the user is logged in and redirected
     to the home.
     """
-    context = dict()
+    if request.method == 'POST':
+        form = UserAuthenticationForm(request.POST)
+        if form.is_valid():
+            email = request.POST['email']
+            password = request.POST['password']
+            credentials = {
+                'email': email,
+                'password': password,
+            }
+            user = authenticate(request, **credentials)
+            if user:
+                login(request, user)
+                context = {'user': user}
+            return HttpResponseRedirect('/')
+    else:
+        form = UserAuthenticationForm()
+    context = {'form': form}
+    return render(request, 'users/login.html', context)
+
+
+def sign_up(request):
+    """User registration view
+
+    This view is used for handling GET and POST request to display the sign up form and
+    create the user. Once the account is created, the user is logged in and redirected
+    to the home.
+    """
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -77,10 +105,12 @@ def signup(request):
             }
             user = User.objects.create_user(email=email, password=password, **data)
             login(request, user)
-            context['user'] = user
+            context = {'user': user}
             return HttpResponseRedirect('/')
-    context['form'] = UserCreationForm()
-    return render(request, 'users/signup.html', context)
+    else:
+        form = UserCreationForm()
+    context = {'form': form}
+    return render(request, 'users/sign_up.html', context)
 
 
 @login_required
