@@ -9,6 +9,7 @@ install:
 
 script:
   - ./clean_project.sh
+  - ./manage.py collectstatic
   - coverage run -m manage test
 
 after_success:
