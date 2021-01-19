@@ -80,7 +80,7 @@ def log_in(request):
             if user:
                 login(request, user)
                 context = {'user': user}
-            return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/')
     else:
         form = UserAuthenticationForm()
     context = {'form': form}
