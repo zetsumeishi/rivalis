@@ -20,32 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['RIVALIS_SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1']
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    # Django
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    # Rivalis
-    'www.apps.WwwConfig',
-    'users.apps.UsersConfig',
-    'organizations.apps.OrganizationsConfig',
-    'disciplines.apps.DisciplinesConfig',
-    # Packages
-    'django_cleanup.apps.CleanupConfig',  # PROD
-    'django_extensions',  # DEV
-]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -76,17 +50,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'rivalis.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-}
 
 
 # Password validation
@@ -122,7 +85,6 @@ EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

@@ -10,7 +10,7 @@ install:
 script:
   - ./clean_project.sh
   - ./manage.py collectstatic
-  - coverage run -m manage test
+  - coverage run -m manage test --settings="rivalis.tests_settings"
 
 after_success:
   - coveralls
