@@ -61,11 +61,10 @@ def profile(request):
 
 
 def log_in(request):
-    """User registration view
+    """User login view
 
-    This view is used for handling GET and POST request to display the sign up form and
-    create the user. Once the account is created, the user is logged in and redirected
-    to the home.
+    This view is used for handling GET and POST request to display the login form. Once
+    the user is authenticated, he is redirected to the home page.
     """
     if request.method == 'POST':
         form = UserAuthenticationForm(request.POST)
