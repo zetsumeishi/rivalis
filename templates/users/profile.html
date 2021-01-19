@@ -24,7 +24,7 @@ My profile
           <h3>{{ request.user.username }}</h3>
           <p class="mb-0">{{ request.user.email }}</p>
           {% if request.user.riot_tag %}
-          <p class="mb-0">{{ request.user.riot_id }}{{ request.user.riot_tag }}</p>
+          <p class="mb-0">{{ request.user.full_riot_id }}</p>
           {% else %}
           <p class="mb-0">No Riot account linked</p>
           {% endif %}

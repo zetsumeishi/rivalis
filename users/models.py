@@ -30,11 +30,19 @@ class User(AbstractUser):
         choices=TIMEZONES,
         default='UTC',
     )
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
 
     def __str__(self):
-        'String representation of a User object'
+        """String representation of a User object."""
+
         return f'{self.email}'
+
+    @property
+    def full_riot_id(self):
+        """Combines the riot_id and riot_tag to display in the templates."""
+
+        return f'{self.riot_id} #{self.riot_tag}'
