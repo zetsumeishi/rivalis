@@ -45,3 +45,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
 }
+
+
+# Emails
+
+# Prints the email content in the terminal
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

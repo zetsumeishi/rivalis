@@ -79,13 +79,6 @@ LOGIN_REDIRECT_URL = 'www:home'
 LOGOUT_REDIRECT_URL = 'www:home'
 
 
-# Emails
-
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 

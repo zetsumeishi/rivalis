@@ -33,3 +33,10 @@ INSTALLED_APPS = [
     # Packages
     'django_cleanup.apps.CleanupConfig',
 ]
+
+
+# Emails
+
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')

@@ -136,3 +136,4 @@ dmypy.json
 # Local settings
 # This is a symlink to the appropriated environment settings
 settings.py
+emails-debug/
