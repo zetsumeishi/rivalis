@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'organizations.apps.OrganizationsConfig',
     'disciplines.apps.DisciplinesConfig',
+    'tournaments.apps.TournamentsConfig',
     # Packages
     'django_cleanup.apps.CleanupConfig',
     'django_extensions',
@@ -45,3 +46,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
 }
+
+
+# SendGrid
+
+# Prints the email content in the terminal
+SENDGRID_ECHO_TO_STDOUT = True
