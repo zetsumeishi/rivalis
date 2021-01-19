@@ -207,4 +207,12 @@ select {
   background-size: cover;
 }
 
+#email-header {
+  height: 150px;
+  background-color: #9E51CF;
+}
+#email-header > h1 {
+  color: white;
+}
+
 /*# sourceMappingURL=rivalis.css.map */
