@@ -1,0 +1,29 @@
+<form action="{% url 'organizations:create_team' %}" method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+      {{ form.name }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.discipline.id_for_label }}">{{ form.discipline.label }}</label>
+      {{ form.discipline }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.discipline.id_for_label }}">{{ form.organization.label }}</label>
+      {{ form.organization }}
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-xs-12 col-lg-6">
+      <a href="{% url 'organizations:create_team' %}"><button class="btn btn-md rivalis-button-primary w-100 mb-3">Create</button></a>
+    </div>
+  </div>
+</form>
+
+<!-- {% if form.username.help_text %}
+<p class="help">{{ form.username.help_text|safe }}</p>
+{% endif %}
+{% if form.username.errors %}
+<p>{{ form.username.errors }}</p>
+{% endif %} -->

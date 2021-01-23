@@ -8,6 +8,10 @@ body {
   color: #343a40;
 }
 
+h3 {
+  font-weight: bolder;
+}
+
 ul {
   list-style-type: none;
 }
@@ -17,6 +21,11 @@ input {
 }
 input[type=file] {
   display: none;
+}
+
+.grid-justify-center {
+  display: grid;
+  justify-content: center;
 }
 
 #current-avatar {
@@ -37,10 +46,6 @@ input[type=file] {
   font-size: 50px !important;
   background-color: #172322;
   border-radius: 5px 5px 5px 5px;
-}
-
-.mt-85 {
-  margin-top: -85px;
 }
 
 .section-bg {

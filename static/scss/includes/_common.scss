@@ -6,6 +6,10 @@ body {
   color: $dark-grey;
 }
 
+h3 {
+  font-weight: bolder;
+}
+
 ul {
   list-style-type: none;
 }
@@ -16,6 +20,11 @@ input {
   &[type='file'] {
     display: none;
   }
+}
+
+.grid-justify-center {
+  display: grid;
+  justify-content: center;
 }
 
 #current-avatar {
@@ -36,10 +45,6 @@ input {
   font-size: 50px !important;
   background-color: rgba(23, 35, 34, 1);
   border-radius: 5px 5px 5px 5px;
-}
-
-.mt-85 {
-  margin-top: -85px;
 }
 
 .section-bg {

@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% load member_role %}
+
 {% block title %}
-  {{ team.name }}
+{{ team.name }}
 {% endblock %}
 
 {% block content %}
-  <div>
-    <h1>{{ team.name }}</h1>
+<div class="container mt-5">
+  <div class="section-bg">
+    <div class="row">
+      <h2>{{ team.name }}</h2>
+    </div>
+    <hr>
+    <div class="row mt-5">
+      <div class="col-xs-12 col-lg-2 mt-5">
+        <img src="{{ team.logo.url }}" alt="{{ team.name }}" width="100%">
+      </div>
+      <div class="col-xs-12 col-lg-5 grid-justify-center">
+        <h3>GAME</h3>
+        <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="80px" class="mr-2">
+      </div>
+      <div class="col-xs-12 col-lg-5 grid-justify-center">
+        <h3>MEMBERS</h3>
+        <ul class="p-0 mt-3 text-center">
+          {% for member in team.members.all %}
+          <li>{{ member.username }} | {{ member|member_role:team }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
   </div>
+</div>
 {% endblock %}
