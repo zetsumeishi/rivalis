@@ -17,7 +17,6 @@ class OrganizationFactory(DjangoModelFactory):
     name = factory.Faker('company')
     slug = factory.LazyAttribute(lambda n: f'{slugify(n.name)}')
     short_name = factory.LazyAttribute(lambda n: f'{n.name[:3]}')
-    is_business = False
     description = fuzzy.FuzzyText(length=400)
     twitch = factory.LazyAttribute(lambda n: f'https://twitter.com/{slugify(n.name)}')
     owner = factory.SubFactory('users.tests.factories.UserFactory')
