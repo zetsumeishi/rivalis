@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse
 from slugify import slugify
 
 from .forms import OrganizationForm
@@ -42,28 +44,29 @@ def detail_organization(request, organization_slug):
 def create_team(request):
     context = dict()
     if request.method == 'POST':
-        form = TeamForm(request.POST)
+        form = TeamForm(request.POST, request=request)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            discipline = form.cleaned_data['discipline']
-            organization = Organization.objects.get(owner=request.user)
-            team = Team.objects.create(
-                name=name,
-                slug=slugify(name),
-                discipline=discipline,
-                organization=organization,
-            )
-            context = {'team': team}
-            return render(request, 'teams/detail.html', context)
-    context['form'] = TeamForm()
+            team = form.save(first_member=request.user)
+            kwargs = {
+                'organization_slug': team.organization.slug,
+                'team_slug': team.slug,
+            }
+            return redirect(reverse('organizations:detail_team', kwargs=kwargs))
+    context['form'] = TeamForm(request=request)
     return render(request, 'teams/create.html', context)
 
 
 def detail_team(request, organization_slug, team_slug):
-    context = dict()
-    context['organization'] = Organization.objects.get(slug=organization_slug)
-    context['team'] = Team.objects.filter(
+    """"""
+
+    organization = Organization.objects.get(slug=organization_slug)
+    team = Team.objects.get(
         slug=team_slug,
-        organization=context['organization'],
+        organization=organization,
     )
+
+    context = {
+        'team': team,
+        'organization': organization,
+    }
     return render(request, 'teams/detail.html', context)
