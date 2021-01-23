@@ -9,7 +9,7 @@ from django.utils.safestring import mark_safe
 from .models import User
 
 
-class AvatarWidget(forms.widgets.FileInput):
+class ImageWidget(forms.widgets.FileInput):
     def render(self, name, value, attrs=None, **kwargs):
         input_html = super().render(
             name,
@@ -83,7 +83,7 @@ class EditProfileForm(forms.ModelForm):
         fields = ['email', 'username', 'timezone', 'riot_id', 'riot_tag', 'avatar']
         exclude = ['password']
 
-    avatar = forms.ImageField(widget=AvatarWidget)
+    avatar = forms.ImageField(widget=ImageWidget)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
