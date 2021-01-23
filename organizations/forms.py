@@ -17,6 +17,21 @@ class OrganizationForm(forms.ModelForm):
             'twitch',
         )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'placeholder': 'Name'})
+        self.fields['short_name'].widget.attrs.update({'placeholder': 'Short name'})
+        self.fields['description'].widget.attrs.update({'placeholder': 'Description'})
+        self.fields['twitch'].widget.attrs.update({'placeholder': 'Twitch URL'})
+
+    def save(self, commit=True, owner=None):
+        organization = super().save(commit=False)
+        organization.slug = slugify(organization.name)
+        organization.owner = owner
+        if commit:
+            organization.save()
+        return organization
+
 
 class TeamForm(forms.ModelForm):
     class Meta:
@@ -44,6 +59,7 @@ class TeamForm(forms.ModelForm):
         self.fields['organization'].queryset = Organization.objects.filter(
             owner=self.request.user,
         )
+        self.fields['name'].widget.attrs.update({'placeholder': 'Name'})
 
     def save(self, commit=True, owner=None):
         team = super().save(commit=False)

@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from slugify import slugify
 
 from .forms import OrganizationForm
 from .forms import TeamForm
@@ -16,27 +15,21 @@ def create_organization(request):
     if request.method == 'POST':
         form = OrganizationForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
-            is_business = form.cleaned_data['is_business']
-            twitch = form.cleaned_data['twitch']
-            context['organization'] = Organization.objects.create(
-                name=name,
-                slug=slugify(name),
-                description=description,
-                is_business=is_business,
-                twitch=twitch,
-                owner=request.user,
-            )
-            return render(request, 'organizations/detail.html', context)
+            organization = form.save(owner=request.user)
+            kwargs = {'organization_slug': organization.organization.slug}
+            return redirect(reverse('organizations:detail_organization', kwargs=kwargs))
     context['form'] = OrganizationForm()
     return render(request, 'organizations/create.html', context)
 
 
 def detail_organization(request, organization_slug):
-    context = dict()
-    context['organization'] = Organization.objects.get(slug=organization_slug)
-    context['teams'] = Team.objects.filter(organization=context['organization'])
+    organization = Organization.objects.get(slug=organization_slug)
+    teams = Team.objects.filter(organization=organization)
+
+    context = {
+        'organization': organization,
+        'teams': teams,
+    }
     return render(request, 'organizations/detail.html', context)
 
 

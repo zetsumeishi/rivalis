@@ -1,7 +1,9 @@
 // Forms
 input[type='text'],
 input[type='password'],
+input[type='url'],
 input[name='email'],
+textarea,
 select {
   color: $dark-grey;
   padding: 0 1em;
@@ -14,6 +16,11 @@ select {
     box-shadow: none;
     border: $border-light-primary;
   }
+}
+
+textarea {
+  height: 100%;
+  padding: 1em;
 }
 
 label {
