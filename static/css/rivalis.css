@@ -8,6 +8,11 @@ body {
   color: #343a40;
 }
 
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 h3 {
   font-weight: bolder;
 }
@@ -56,37 +61,31 @@ input[type=file] {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   letter-spacing: -0.1em;
   text-transform: uppercase;
   font-weight: bolder;
   color: #343a40;
 }
 
-i.fa-discord {
+i.fab {
   color: #343a40;
+  transition: color 0.5s;
 }
+
 i.fa-discord:hover {
   color: #7289DA;
 }
 
-i.fa-youtube {
-  color: #343a40;
-}
 i.fa-youtube:hover {
   color: #FF0000;
 }
 
-i.fa-twitter {
-  color: #343a40;
-}
 i.fa-twitter:hover {
   color: #009DED;
 }
 
-i.fa-twitch {
-  color: #343a40;
-}
 i.fa-twitch:hover {
   color: #9244FF;
 }
@@ -102,29 +101,16 @@ nav.navbar a {
   line-height: 1.5em;
   font-weight: 600;
   color: black;
+  text-transform: uppercase;
 }
 nav.navbar a:hover {
-  color: #9E51CF;
+  color: #357BF7;
 }
 nav.navbar .navbar-brand {
   font-size: 2em;
+  letter-spacing: -0.1em;
   font-family: "Josefin Sans", "Open Sans", sans-serif;
-  color: #9E51CF;
-}
-
-footer {
-  background-color: #343a40;
-}
-footer a {
-  line-height: 1.5em;
-  font-weight: 600;
-  color: white;
-}
-footer a:hover {
-  color: #9E51CF;
-}
-footer i.fab {
-  color: white;
+  color: #357BF7;
 }
 
 input[type=text],
@@ -147,7 +133,7 @@ input[name=email]:focus,
 textarea:focus,
 select:focus {
   box-shadow: none;
-  border: 1px solid rgba(158, 81, 207, 0.5);
+  border: 1px solid rgba(53, 123, 247, 0.5);
 }
 
 textarea {
@@ -167,21 +153,40 @@ select {
   text-overflow: "";
 }
 
-.rivalis-button-red, .rivalis-button-primary {
+.rivalis-button-red, .rivalis-button-inverted, .rivalis-button-primary {
+  height: 50px;
+  width: 200px;
   color: white;
+  font-size: 1.1em;
   font-weight: 600;
   text-transform: uppercase;
-  border: 1px solid rgba(158, 81, 207, 0.5);
-  background-color: #9E51CF;
+  border: 1px solid rgba(53, 123, 247, 0.5);
+  background-color: #357BF7;
   transition: color 0.5s, background-color 0.5s;
 }
-.rivalis-button-red:hover, .rivalis-button-primary:hover {
-  color: #9E51CF !important;
+.rivalis-button-red:hover, .rivalis-button-inverted:hover, .rivalis-button-primary:hover {
+  color: #357BF7;
   background-color: white;
+  box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
+  -moz-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
+  -webkit-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
 }
-.rivalis-button-red > a, .rivalis-button-primary > a {
+.rivalis-button-red > a, .rivalis-button-inverted > a, .rivalis-button-primary > a {
   color: white;
   text-decoration: none;
+}
+
+.rivalis-button-inverted {
+  color: #357BF7;
+  border: 1px solid rgba(53, 123, 247, 0.5);
+  background-color: white;
+}
+.rivalis-button-inverted:hover {
+  color: white;
+  background-color: #357BF7;
+  box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
+  -moz-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
+  -webkit-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
 }
 
 .rivalis-button-red {
@@ -200,7 +205,7 @@ select {
   border-radius: 0.5em 0.5em 0 0;
 }
 .card-form > .card-title > .title-text {
-  color: #9E51CF;
+  color: #357BF7;
   font-weight: bolder;
   font-size: 1.5em;
   text-transform: uppercase;
@@ -223,7 +228,7 @@ select {
 
 #email-header {
   height: 150px;
-  background-color: #9E51CF;
+  background-color: #357BF7;
 }
 #email-header > h1 {
   color: white;

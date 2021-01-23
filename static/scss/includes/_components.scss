@@ -38,18 +38,20 @@ select {
 // Buttons
 
 %rivalis-button {
+  height: 50px;
+  width: 200px;
   color: white;
+  font-size: 1.1em;
   font-weight: 600;
   text-transform: uppercase;
   border: $border-light-primary;
   background-color: $primary-color;
   transition: color 0.5s, background-color 0.5s;
-  // button[type='submit']
   &:hover {
-    color: $primary-color !important;
+    color: $primary-color;
     background-color: white;
+    @include box-shadow(0px, 0px, 10px, rgb(53, 123, 247, 0.25));
   }
-  // Button with link
   & > a {
     color: white;
     text-decoration: none;
@@ -58,6 +60,18 @@ select {
 
 .rivalis-button-primary {
   @extend %rivalis-button;
+}
+
+.rivalis-button-inverted {
+  @extend %rivalis-button;
+  color: $primary-color;
+  border: $border-light-primary;
+  background-color: white;
+  &:hover {
+    color: white;
+    background-color: $primary-color;
+    @include box-shadow(0px, 0px, 10px, rgb(53, 123, 247, 0.25));
+  }
 }
 
 .rivalis-button-red {

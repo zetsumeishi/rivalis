@@ -6,6 +6,12 @@ body {
   color: $dark-grey;
 }
 
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 h3 {
   font-weight: bolder;
 }
@@ -55,7 +61,8 @@ input {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   letter-spacing: -0.1em;
   text-transform: uppercase;
   font-weight: bolder;
