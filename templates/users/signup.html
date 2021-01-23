@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Forgot Your Password?
+Sign Up
 {% endblock %}
 
 {% block content %}
@@ -9,14 +9,14 @@ Forgot Your Password?
   <div class="d-flex justify-content-center align-items-center h-100">
     <div class="col-lg-5 col-md-8 col-sm-12 card card-form p-3 shadow-sm">
       <div class="card-title text-center">
-        <span class="title-text">Lost Password</span>
+        <span class="title-text">Sign Up</span>
       </div>
       <div class="card-body">
-        {% include "users/includes/_password_reset_form.html" %}
+        {% include "users/includes/_signup_form.html" %}
       </div>
       <div class="card-footer text-center">
         <a href="{% url 'users:login' %}"><button class="btn rivalis-button-inverted mb-3">Log In</button></a>
-        <a href="{% url 'users:signup' %}"><button class="btn rivalis-button-inverted">Sign Up</button></a>
+        <a href="{% url 'users:password_reset' %}"><button class="btn rivalis-button-inverted">Lost Password</button></a>
       </div>
     </div>
   </div>

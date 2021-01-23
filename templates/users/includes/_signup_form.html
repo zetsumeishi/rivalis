@@ -1,0 +1,18 @@
+<form action="{% url 'users:signup' %}" method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+  <div class="row mb-3">
+    {{ form.username }}
+  </div>
+  <div class="row mb-3">
+    {{ form.email }}
+  </div>
+  <div class="row mb-3">
+    {{ form.password1 }}
+  </div>
+  <div class="row mb-3">
+    {{ form.password2 }}
+  </div>
+  <div class="row justify-content-center mt-5">
+    <button type="submit" class="btn rivalis-button-primary">Sign Up</button>
+  </div>
+</form>

@@ -1,0 +1,12 @@
+<form action="{% url 'users:login' %}" method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+  <div class="row mb-3">
+    {{ form.email }}
+  </div>
+  <div class="row mb-3">
+    {{ form.password }}
+  </div>
+  <div class="row justify-content-center mt-5">
+    <button type="submit" class="btn rivalis-button-primary">Log In</button>
+  </div>
+</form>
