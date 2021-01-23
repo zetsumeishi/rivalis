@@ -46,7 +46,7 @@ def create_team(request):
     if request.method == 'POST':
         form = TeamForm(request.POST, request=request)
         if form.is_valid():
-            team = form.save(first_member=request.user)
+            team = form.save(owner=request.user)
             kwargs = {
                 'organization_slug': team.organization.slug,
                 'team_slug': team.slug,
@@ -57,8 +57,6 @@ def create_team(request):
 
 
 def detail_team(request, organization_slug, team_slug):
-    """"""
-
     organization = Organization.objects.get(slug=organization_slug)
     team = Team.objects.get(
         slug=team_slug,

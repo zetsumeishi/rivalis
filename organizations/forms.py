@@ -45,11 +45,11 @@ class TeamForm(forms.ModelForm):
             owner=self.request.user,
         )
 
-    def save(self, commit=True, first_member=None):
+    def save(self, commit=True, owner=None):
         team = super().save(commit=False)
         team.slug = slugify(team.name)
         if commit:
             team.save()
-            membership = TeamMembership(user=first_member, team=team, role='owner')
+            membership = TeamMembership(user=owner, team=team, role='owner')
             membership.save()
         return team
