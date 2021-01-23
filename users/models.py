@@ -17,8 +17,8 @@ class User(AbstractUser):
     """
 
     email = models.EmailField('Email', unique=True)
-    riot_id = models.CharField('Riot ID', max_length=255, null=True)
-    riot_tag = models.CharField('Riot Tag', max_length=255, null=True)
+    riot_id = models.CharField('Riot ID', max_length=255, blank=True)
+    riot_tag = models.CharField('Riot Tag', max_length=255, blank=True)
     avatar = models.ImageField(
         'Avatar',
         upload_to='avatars/',
