@@ -81,16 +81,16 @@ class UsersViewsTests(TestCase):
 
         self.client.logout()
 
-    def tests_sign_up(self):
-        """Tests for users.views.sign_up"""
+    def tests_signup(self):
+        """Tests for users.views.signup"""
 
-        url = reverse('users:sign_up')
+        url = reverse('users:signup')
         email = 'heaton@rivalis.gg'
         password = 'KQ3aiBM(=+9='
         username = 'HeatoN'
         timezone = 'Europe/Stockholm'
 
-        # [GET] Rendering the sign_up form
+        # [GET] Rendering the signup form
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
@@ -115,10 +115,10 @@ class UsersViewsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(self.User.objects.get(email=email))
 
-    def tests_log_in(self):
-        """Tests for users.views.log_in"""
+    def tests_login(self):
+        """Tests for users.views.login"""
 
-        url = reverse('users:log_in')
+        url = reverse('users:login')
         email = 'spawn@rivalis.gg'
         password = 'KQ3aiBM(=+9='
 

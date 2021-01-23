@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from django.contrib.auth import login
+from django.contrib.auth import login as signin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
@@ -60,7 +60,7 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
-def log_in(request):
+def login(request):
     """User login view
 
     This view is used for handling GET and POST request to display the login form. Once
@@ -77,7 +77,7 @@ def log_in(request):
             }
             user = authenticate(request, **credentials)
             if user:
-                login(request, user)
+                signin(request, user)
                 context = {'user': user}
                 return HttpResponseRedirect('/')
     else:
@@ -86,7 +86,7 @@ def log_in(request):
     return render(request, 'users/login.html', context)
 
 
-def sign_up(request):
+def signup(request):
     """User registration view
 
     This view is used for handling GET and POST request to display the sign up form and
@@ -109,7 +109,7 @@ def sign_up(request):
     else:
         form = UserCreationForm()
     context = {'form': form}
-    return render(request, 'users/sign_up.html', context)
+    return render(request, 'users/signup.html', context)
 
 
 @login_required
