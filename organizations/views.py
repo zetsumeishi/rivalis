@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -8,6 +9,22 @@ from .forms import OrganizationForm
 from .forms import TeamForm
 from .models import Organization
 from .models import Team
+from users.models import User
+
+
+@login_required
+def kick_team_member(request):
+    if request.is_ajax():
+        member_id = request.GET.get('member_id', '')
+        team_id = request.GET.get('team_id', '')
+        member = User.objects.get(pk=int(member_id))
+        team = Team.objects.get(pk=int(team_id))
+        team.members.remove(member)
+        response = {
+            'id': str(member_id),
+        }
+        return JsonResponse(response, status=200)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
