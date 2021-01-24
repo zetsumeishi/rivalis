@@ -17,7 +17,7 @@ def create_organization(request):
         form = OrganizationForm(request.POST)
         if form.is_valid():
             organization = form.save(owner=request.user)
-            kwargs = {'organization_slug': organization.organization.slug}
+            kwargs = {'organization_slug': organization.slug}
             return redirect(reverse('organizations:detail_organization', kwargs=kwargs))
     context['form'] = OrganizationForm()
     return render(request, 'organizations/create.html', context)
