@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .decorators import is_organization_owner
+from .decorators import is_owner
 from .forms import OrganizationForm
 from .forms import TeamForm
 from .models import Organization
@@ -35,7 +35,7 @@ def detail_organization(request, organization_slug):
 
 
 @login_required
-@is_organization_owner
+@is_owner
 def create_team(request):
     context = dict()
     if request.method == 'POST':

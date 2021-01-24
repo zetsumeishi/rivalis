@@ -4,7 +4,7 @@ from django.urls import reverse
 from .models import Organization
 
 
-def is_organization_owner(func):
+def is_owner(func):
     def wrapper(request, *args, **kwargs):
         is_owner = Organization.objects.filter(owner=request.user).exists()
         if is_owner:
