@@ -9,7 +9,7 @@ class Organization(models.Model):
     slug = models.CharField('Slug', max_length=255)
     short_name = models.CharField('Short name', max_length=255)
     description = models.TextField('Description', blank=True)
-    twitch = models.URLField('Twitch', blank=True)
+    twitch = models.URLField('Twitch', null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(
         'Logo',
