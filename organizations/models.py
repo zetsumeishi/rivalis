@@ -8,8 +8,8 @@ class Organization(models.Model):
     name = models.CharField('Name', max_length=255)
     slug = models.CharField('Slug', max_length=255)
     short_name = models.CharField('Short name', max_length=255)
-    description = models.TextField('Description')
-    twitch = models.URLField('Twitch')
+    description = models.TextField('Description', blank=True)
+    twitch = models.URLField('Twitch', blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(
         'Logo',
