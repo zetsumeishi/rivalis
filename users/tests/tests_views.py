@@ -134,7 +134,7 @@ class UsersViewsTests(TestCase):
         }
         response = self.client.post(url, payload)
 
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
         # [POST] Connection with the correct credentials
         payload.update(password=password)

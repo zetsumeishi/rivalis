@@ -19,7 +19,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_login = timezone.now()
     username = factory.Faker('user_name')
     email = factory.Faker('ascii_safe_email')
-    password = factory.Faker('password', length=12)
+    password = factory.PostGenerationMethodCall('set_password', 'KQ3aiBM(=+9=')
     riot_id = factory.LazyAttribute(lambda n: n.username)
     riot_tag = f'#{random.randint(100, 999)}'
     timezone = factory.fuzzy.FuzzyChoice(timezones)
