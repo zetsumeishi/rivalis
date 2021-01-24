@@ -15,6 +15,21 @@ class OrganizationsViewsTests(TestCase):
         self.discipline = DisciplineFactory()
         self.organization = OrganizationFactory(owner=self.owner)
 
+    def tests_detail_team(self):
+        """Tests for organizations.views.detail_team"""
+
+        payload = {
+            'organization_slug': self.organization.slug,
+            'team_slug': self.team.slug,
+        }
+        url = reverse('organizations:detail_team', kwargs=payload)
+        self.client.force_login(self.owner)
+
+        # [GET] A single team page
+        response = self.client.get(url, payload)
+
+        self.assertEqual(response.status_code, 200)
+
     def tests_create_team(self):
         """Tests for organizations.views.create_team"""
 
