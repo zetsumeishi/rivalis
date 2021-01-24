@@ -6,6 +6,7 @@ install:
   - pip install -r requirements.txt
 
 script:
+  - ln -s rivalis/tests_settings.py rivalis/settings.py
   - ./clean_project.sh
   - ./manage.py collectstatic
   - coverage run -m manage test --settings="rivalis.tests_settings"
