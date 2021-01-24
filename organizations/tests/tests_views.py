@@ -16,6 +16,8 @@ class OrganizationsViewsTests(TestCase):
         self.organization = OrganizationFactory(owner=self.owner)
 
     def tests_create_team(self):
+        """Tests for organizations.views.create_team"""
+
         url = reverse('organizations:create_team')
         self.client.force_login(self.owner)
         name = 'Rivalis LoL'
@@ -37,12 +39,14 @@ class OrganizationsViewsTests(TestCase):
 
         # [POST] Create a team with valid args
         payload.update(name=name)
-        response = self.client.post(url, payload)
-        team = Team.objects.get(slug=slug)
+        response = self.client.post(url, payload, follow=True)
+        team = response.context['team']
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(team)
         self.assertEqual(team.name, name)
         self.assertEqual(team.slug, slug)
+        self.assertEqual(team.discipline.name, discipline)
+        self.assertTrue(team.members.all().exists())
 
         self.client.logout()
