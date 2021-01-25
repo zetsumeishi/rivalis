@@ -9,6 +9,7 @@ from .forms import EditProfileForm
 from .forms import UserAuthenticationForm
 from .forms import UserCreationForm
 from .models import User
+from organizations.models import Organization
 
 
 @login_required
@@ -55,6 +56,7 @@ def profile(request):
     """
     context = {
         'teams': request.user.team_set.all(),
+        'organizations': Organization.objects.filter(owner=request.user),
     }
 
     return render(request, 'users/profile.html', context)

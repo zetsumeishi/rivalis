@@ -39,6 +39,45 @@ My profile
     </div>
     <div class="section-bg mt-3">
       <div class="row">
+        <h2>My Organizations</h2>
+      </div>
+      <hr>
+      {% if organizations %}
+      {% for organization in organizations %}
+      <div class="row mt-3">
+        <div class="col-2">
+          <img src="{{ organization.logo.url }}" alt="{{ organization.name }}" width="100%">
+        </div>
+        <div class="col-5">
+          <p>
+            <a href="{% url 'organizations:detail_organization' organization.slug %}">
+            {{ organization.name }} | {{ organization.short_name }}
+            </a>
+          </p>
+        </div>
+        <div class="col-5">
+          <h3>Teams</h3>
+          <ul class="p-0 mt-3">
+            {% for team in organization.team_set.all %}
+            <li>
+              <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="18px" class="mr-2">
+              <a href="{% url 'organizations:detail_team' team.organization.slug team.slug %}">
+                {{ team.name }} | {{ team.discipline.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="row mt-3">
+        <p class="text-muted"><em>You haven't joined an organization yet.</em></p>
+      </div>
+      {% endif %}
+    </div>
+    <div class="section-bg mt-3">
+      <div class="row">
         <h2>My Teams</h2>
       </div>
       <hr>
@@ -57,7 +96,6 @@ My profile
           </p>
         </div>
         <div class="col-5">
-
           <h3>Members</h3>
           <ul class="p-0 mt-3">
             {% for member in team.members.all %}
