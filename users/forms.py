@@ -81,7 +81,6 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['email', 'username', 'timezone', 'riot_id', 'riot_tag', 'avatar']
-        exclude = ['password']
 
     avatar = forms.ImageField(widget=ImageWidget)
 
