@@ -1,33 +1,110 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% load member_role  %}
+{% load team_owner %}
+
 {% block title %}
-  {{ organization.name }}
+{{ organization.name }}
 {% endblock %}
 
 {% block content %}
-  <div>
-    <h1>{{ organization.name }}</h1>
-    <ul>
-      <li>{{ organization.description }}</li>
-      <li>{{ organization.twitch }}</li>
-    </ul>
+<div class="container mt-5">
+  <div class="section-bg">
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <h2>{{ organization.name }}</h2>
+      </div>
+      {% if request.user == organization.owner %}
+      <div class="col-xs-12 col-md-4 offset-md-4">
+        <a href="{% url 'organizations:create_team' %}">
+          <button class="btn rivalis-button-inverted mb-3">Create team</button>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <p>{{ organization.description }}</p>
+      </div>
+      <div class="col-4">
+        <ul>
+          {% if organization.website %}
+          <li>
+            <a href="{{ organization.website }}">
+              <i class="fas fa-globe">{{ organization.website }}</i>
+            </a>
+          </li>
+          {% endif %}
+          {% if organization.twitch %}
+          <li>
+            <a href="{{ organization.twitch }}">
+              <i class="fab fa-twitch">{{ organization.twitch }}</i>
+            </a>
+          </li>
+          {% endif %}
+          {% if organization.youtube %}
+          <li>
+            <a href="{{ organization.youtube }}">
+              <i class="fab fa-youtube">{{ organization.youtube }}</i>
+            </a>
+          </li>
+          {% endif %}
+          {% if organization.instagram %}
+          <li>
+            <a href="{{ organization.instagram }}">
+              <i class="fab fa-instagram">{{ organization.instagram }}</i>
+            </a>
+          </li>
+          {% endif %}
+          {% if organization.twitter %}
+          <li>
+            <a href="{{ organization.twitter }}">
+              <i class="fab fa-twitter">{{ organization.twitter }}</i>
+            </a>
+          </li>
+          {% endif %}
+          {% if organization.reddit %}
+          <li>
+            <a href="{{ organization.reddit }}">
+              <i class="fab fa-reddit">{{ organization.reddit }}</i>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
   </div>
-
-  {% if request.user == organization.owner %}
-    <button type="button" name="button">
-      <a href="{% url 'organizations:create_team' %}">Create Team</a>
-    </button>
-  {% endif %}
-
-  {% if teams %}
+  <div class="section-bg mt-3">
     {% for team in teams %}
-      <h2><a href="{% url 'organizations:detail_team' team.organization.slug team.slug %}">{{ team.name }}</a> | {{ team.short_name }}</h2>
-      <p>{{ team.discipline }}</p>
-      <ul>
-      {% for member in team.members.all %}
-          <li>{{ member.email }}</li>
-      {% endfor %}
-      </ul>
+    <div class="row mt-5">
+      <div class="col-xs-12 col-lg-2 mt-5">
+        <img src="{{ team.logo.url }}" alt="{{ team.name }}" width="100%">
+      </div>
+      <div class="col-xs-12 col-lg-5 grid-justify-center">
+        <h3>GAME</h3>
+        <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="80px" class="mr-2">
+      </div>
+      <div class="col-xs-12 col-lg-5 grid-justify-center">
+        <h3>MEMBERS</h3>
+        <ul class="p-0 mt-3 text-center">
+          {% with is_owner=request.user|team_owner:team %}
+          {% for member in team.members.all %}
+          <li>
+            {{ member.username }} | {{ member|member_role:team }}
+            {% if request.user.is_authenticated and is_owner %}
+            <button id="{{ member.id }}" class="btn rivalis-button-red kick-team-member" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {% endif %}
+          </li>
+          {% endfor %}
+          {% endwith %}
+        </ul>
+      </div>
+    </div>
     {% endfor %}
-  {% endif %}
+  </div>
+</div>
 {% endblock %}
