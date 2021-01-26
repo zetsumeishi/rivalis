@@ -47,7 +47,12 @@ class OrganizationsViewsTests(TestCase):
             'short_name': short_name,
             'slug': slug,
             'description': description,
+            'website': '',
             'twitch': twitch,
+            'youtube': '',
+            'twitter': '',
+            'instagram': '',
+            'reddit': '',
         }
         response = self.client.post(url, payload)
 
