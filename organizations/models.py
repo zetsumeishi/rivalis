@@ -9,12 +9,12 @@ class Organization(models.Model):
     slug = models.CharField('Slug', max_length=255)
     short_name = models.CharField('Short name', max_length=255)
     description = models.TextField('Description', blank=True)
-    website = models.URLField('Website', null=True)
-    twitch = models.URLField('Twitch', null=True)
-    youtube = models.URLField('Youtube', null=True)
-    twitter = models.URLField('Twitter', null=True)
-    instagram = models.URLField('Instagram', null=True)
-    reddit = models.URLField('Reddit', null=True)
+    website = models.URLField('Website', blank=True)
+    twitch = models.URLField('Twitch', blank=True)
+    youtube = models.URLField('Youtube', blank=True)
+    twitter = models.URLField('Twitter', blank=True)
+    instagram = models.URLField('Instagram', blank=True)
+    reddit = models.URLField('Reddit', blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(
         'Logo',
