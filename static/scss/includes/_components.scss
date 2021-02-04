@@ -1,20 +1,19 @@
-// Forms
 input[type='text'],
 input[type='password'],
 input[type='url'],
 input[name='email'],
 textarea,
 select {
-  color: $dark-grey;
-  padding: 0 1em;
+  border: 1px solid $input-border;
   border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: $dark-grey;
   height: 50px;
+  padding: 0 1em;
   width: 100%;
 
   &:focus {
-    box-shadow: none;
     border: $border-light-primary;
+    box-shadow: none;
   }
 }
 
@@ -24,35 +23,35 @@ textarea {
 }
 
 label {
+  color: $dark-grey;
   font-size: 1.1em;
   font-weight: bolder;
-  color: $dark-grey;
 }
 
 select {
   -moz-appearance: none;
-  text-indent: 0.01px;
+  text-indent: .01px;
   text-overflow: '';
 }
 
-// Buttons
-
 %rivalis-button {
-  height: 50px;
-  width: 200px;
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  border: $border-light-primary;
   background-color: $primary-color;
-  transition: color 0.5s, background-color 0.5s;
+  border: $border-light-primary;
+  color: $white;
+  font-weight: 600;
+  height: 50px;
+  text-transform: uppercase;
+  transition: color .5s, background-color .5s;
+  width: 200px;
+
   &:hover {
+    @include box-shadow(0, 0, 10px, rgb(53, 123, 247, .25));
+    background-color: $white;
     color: $primary-color;
-    background-color: white;
-    @include box-shadow(0px, 0px, 10px, rgb(53, 123, 247, 0.25));
   }
+
   & > a {
-    color: white;
+    color: $white;
     text-decoration: none;
   }
 }
@@ -63,49 +62,46 @@ select {
 
 .rivalis-button-inverted {
   @extend %rivalis-button;
-  color: $primary-color;
+  background-color: $white;
   border: $border-light-primary;
-  background-color: white;
+  color: $primary-color;
+
   &:hover {
-    color: white;
+    @include box-shadow(0, 0, 10px, rgb(53, 123, 247, .25));
     background-color: $primary-color;
-    @include box-shadow(0px, 0px, 10px, rgb(53, 123, 247, 0.25));
+    color: $white;
   }
 }
 
 .rivalis-button-red {
   @extend %rivalis-button;
-  border: $border-light-red;
   background-color: $red;
+  border: $border-light-red;
+
   &:hover {
+    background-color: $white;
     color: $red !important;
-    background-color: white;
   }
 }
-// Cards -> Forms
 
 .card-form {
-  border-radius: 0.5em;
+  border-radius: .5em;
 
   & > .card-title {
-    border-radius: 0.5em 0.5em 0 0;
+    border-radius: .5em .5em 0 0;
 
     & > .title-text {
       color: $primary-color;
-      font-weight: bolder;
       font-size: 1.5em;
+      font-weight: bolder;
       text-transform: uppercase;
     }
   }
 
   & > .card-body {
     & > form {
-      & .fieldWrapper {
-        margin: 15px 0;
-
-        & > select {
-          width: 100%;
-        }
+      & > select {
+        width: 100%;
       }
     }
   }

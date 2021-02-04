@@ -1,44 +1,41 @@
-// Icons
-
-i.fab {
-  color: $dark-grey;
-  transition: color 0.5s;
-}
-
-i.fa-discord {
-  &:hover {
-    color: $discord;
-  }
-}
-
-i.fa-youtube {
-  &:hover {
-    color: $youtube;
-  }
-}
-
-i.fa-twitter {
-  &:hover {
-    color: $twitter;
-  }
-}
-
-i.fa-twitch {
-  &:hover {
-    color: $twitch;
-  }
-}
-// Navbar
-
 nav.navbar {
-  @include box-shadow(0px, 2px, 4px, rgb(0, 0, 0, 0.2));
+  @include box-shadow(0, 2px, 4px, rgb(0, 0, 0, .2));
+  background-color: $white;
   height: 85px;
-  background-color: white;
+
+  & i.fab {
+    color: $dark-grey;
+    transition: color .5s;
+  }
+
+  & i.fa-discord {
+    &:hover {
+      color: $discord;
+    }
+  }
+
+  & i.fa-youtube {
+    &:hover {
+      color: $youtube;
+    }
+  }
+
+  & i.fa-twitter {
+    &:hover {
+      color: $twitter;
+    }
+  }
+
+  & i.fa-twitch {
+    &:hover {
+      color: $twitch;
+    }
+  }
 
   & a {
-    line-height: 1.5em;
+    color: $black;
     font-weight: 600;
-    color: black;
+    line-height: 1.5em;
     text-transform: uppercase;
 
     &:hover {
@@ -47,10 +44,9 @@ nav.navbar {
   }
 
   & .navbar-brand {
-    font-size: 2em;
-    letter-spacing: -0.1em;
-    font-family: 'Josefin Sans', 'Open Sans', sans-serif;
     color: $primary-color;
+    font-family: 'Josefin Sans', 'Open Sans', sans-serif;
+    font-size: 2em;
+    letter-spacing: -.1em;
   }
 }
-// Footer

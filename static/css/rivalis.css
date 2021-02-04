@@ -1,16 +1,18 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Open+Sans:wght@300;400;600;700&display=swap");
 body {
-  font-size: 16px;
-  font-family: "Open Sans", Helvetica, sans-serif;
   background-color: #ededed;
-  height: 100%;
   color: #343a40;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 16px;
 }
 
-.row {
-  margin-left: 0;
-  margin-right: 0;
+h1,
+h2,
+h3 {
+  color: #343a40;
+  font-weight: bolder;
+  letter-spacing: -0.1em;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -28,89 +30,60 @@ input[type=file] {
   display: none;
 }
 
-.grid-justify-center {
-  display: grid;
-  justify-content: center;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #current-avatar {
-  position: relative;
   display: inline-block;
-}
-
-#current-avatar::before {
-  content: "📷";
-  z-index: 1000;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 3px 15px 3px 25px;
-  color: white;
-  font-family: "FontAwesome";
-  font-size: 50px !important;
-  background-color: #172322;
-  border-radius: 5px 5px 5px 5px;
+  position: relative;
 }
 
 .section-bg {
-  background-color: white;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.11);
   border-radius: 5px;
   padding: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.11);
-}
-
-h1,
-h2,
-h3 {
-  letter-spacing: -0.1em;
-  text-transform: uppercase;
-  font-weight: bolder;
-  color: #343a40;
-}
-
-i.fab {
-  color: #343a40;
-  transition: color 0.5s;
-}
-
-i.fa-discord:hover {
-  color: #7289DA;
-}
-
-i.fa-youtube:hover {
-  color: #FF0000;
-}
-
-i.fa-twitter:hover {
-  color: #009DED;
-}
-
-i.fa-twitch:hover {
-  color: #9244FF;
 }
 
 nav.navbar {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
   height: 85px;
-  background-color: white;
+}
+nav.navbar i.fab {
+  color: #343a40;
+  transition: color 0.5s;
+}
+nav.navbar i.fa-discord:hover {
+  color: #7289da;
+}
+nav.navbar i.fa-youtube:hover {
+  color: #f00;
+}
+nav.navbar i.fa-twitter:hover {
+  color: #009ded;
+}
+nav.navbar i.fa-twitch:hover {
+  color: #9244ff;
 }
 nav.navbar a {
-  line-height: 1.5em;
+  color: #000;
   font-weight: 600;
-  color: black;
+  line-height: 1.5em;
   text-transform: uppercase;
 }
 nav.navbar a:hover {
-  color: #357BF7;
+  color: #357bf7;
 }
 nav.navbar .navbar-brand {
+  color: #357bf7;
+  font-family: "Josefin Sans", "Open Sans", sans-serif;
   font-size: 2em;
   letter-spacing: -0.1em;
-  font-family: "Josefin Sans", "Open Sans", sans-serif;
-  color: #357BF7;
 }
 
 input[type=text],
@@ -119,11 +92,11 @@ input[type=url],
 input[name=email],
 textarea,
 select {
-  color: #343a40;
-  padding: 0 1em;
-  border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 3px;
+  color: #343a40;
   height: 50px;
+  padding: 0 1em;
   width: 100%;
 }
 input[type=text]:focus,
@@ -132,8 +105,8 @@ input[type=url]:focus,
 input[name=email]:focus,
 textarea:focus,
 select:focus {
-  box-shadow: none;
   border: 1px solid rgba(53, 123, 247, 0.5);
+  box-shadow: none;
 }
 
 textarea {
@@ -142,9 +115,9 @@ textarea {
 }
 
 label {
+  color: #343a40;
   font-size: 1.1em;
   font-weight: bolder;
-  color: #343a40;
 }
 
 select {
@@ -154,47 +127,47 @@ select {
 }
 
 .rivalis-button-red, .rivalis-button-inverted, .rivalis-button-primary {
-  height: 50px;
-  width: 200px;
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
+  background-color: #357bf7;
   border: 1px solid rgba(53, 123, 247, 0.5);
-  background-color: #357BF7;
+  color: #fff;
+  font-weight: 600;
+  height: 50px;
+  text-transform: uppercase;
   transition: color 0.5s, background-color 0.5s;
+  width: 200px;
 }
 .rivalis-button-red:hover, .rivalis-button-inverted:hover, .rivalis-button-primary:hover {
-  color: #357BF7;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
-  -moz-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
-  -webkit-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
+  -moz-box-shadow: 0 0 10px rgba(53, 123, 247, 0.25);
+  -webkit-box-shadow: 0 0 10px rgba(53, 123, 247, 0.25);
+  box-shadow: 0 0 10px rgba(53, 123, 247, 0.25);
+  background-color: #fff;
+  color: #357bf7;
 }
 .rivalis-button-red > a, .rivalis-button-inverted > a, .rivalis-button-primary > a {
-  color: white;
+  color: #fff;
   text-decoration: none;
 }
 
 .rivalis-button-inverted {
-  color: #357BF7;
+  background-color: #fff;
   border: 1px solid rgba(53, 123, 247, 0.5);
-  background-color: white;
+  color: #357bf7;
 }
 .rivalis-button-inverted:hover {
-  color: white;
-  background-color: #357BF7;
-  box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
-  -moz-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
-  -webkit-box-shadow: 0px 0px 10px rgba(53, 123, 247, 0.25);
+  -moz-box-shadow: 0 0 10px rgba(53, 123, 247, 0.25);
+  -webkit-box-shadow: 0 0 10px rgba(53, 123, 247, 0.25);
+  box-shadow: 0 0 10px rgba(53, 123, 247, 0.25);
+  background-color: #357bf7;
+  color: #fff;
 }
 
 .rivalis-button-red {
+  background-color: #f00;
   border: 1px solid rgba(255, 0, 0, 0.5);
-  background-color: #FF0000;
 }
 .rivalis-button-red:hover {
-  color: #FF0000 !important;
-  background-color: white;
+  background-color: #fff;
+  color: #f00 !important;
 }
 
 .card-form {
@@ -204,33 +177,33 @@ select {
   border-radius: 0.5em 0.5em 0 0;
 }
 .card-form > .card-title > .title-text {
-  color: #357BF7;
-  font-weight: bolder;
+  color: #357bf7;
   font-size: 1.5em;
+  font-weight: bolder;
   text-transform: uppercase;
 }
-.card-form > .card-body > form .fieldWrapper {
-  margin: 15px 0;
-}
-.card-form > .card-body > form .fieldWrapper > select {
+.card-form > .card-body > form > select {
   width: 100%;
 }
 .card-form > .card-footer {
   background: none;
 }
 
-.jumbotron {
+header img {
+  height: 100%;
+  object-fit: cover;
+}
+header .carousel-item {
   height: 100vh;
-  background: url("/static/img/home_hero.jpeg") no-repeat;
-  background-size: cover;
+  min-height: 400px;
 }
 
 #email-header {
   height: 150px;
-  background-color: #357BF7;
+  background-color: #357bf7;
 }
 #email-header > h1 {
-  color: white;
+  color: #fff;
 }
 
 /*# sourceMappingURL=rivalis.css.map */

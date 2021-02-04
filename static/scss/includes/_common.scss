@@ -1,15 +1,17 @@
 body {
-  font-size: 16px;
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  background-color: hsl(0, 0%, 93%);
-  height: 100%;
+  background-color: $light-grey;
   color: $dark-grey;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
 }
 
-
-.row {
-  margin-left: 0;
-  margin-right: 0;
+h1,
+h2,
+h3 {
+  color: $dark-grey;
+  font-weight: bolder;
+  letter-spacing: -.1em;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -28,43 +30,19 @@ input {
   }
 }
 
-.grid-justify-center {
-  display: grid;
-  justify-content: center;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #current-avatar {
-  position: relative;
   display: inline-block;
-}
-
-#current-avatar::before {
-  content: '📷';
-  z-index: 1000;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 3px 15px 3px 25px;
-  color: white;
-  font-family: 'FontAwesome';
-  font-size: 50px !important;
-  background-color: rgba(23, 35, 34, 1);
-  border-radius: 5px 5px 5px 5px;
+  position: relative;
 }
 
 .section-bg {
-  background-color: white;
+  background-color: $white;
+  border: $border-grey;
   border-radius: 5px;
   padding: 50px;
-  border: $border-grey;
-}
-
-h1,
-h2,
-h3 {
-  letter-spacing: -0.1em;
-  text-transform: uppercase;
-  font-weight: bolder;
-  color: $dark-grey;
 }

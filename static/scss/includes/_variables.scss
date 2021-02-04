@@ -1,16 +1,21 @@
-$primary-color: #357BF7;
+$white: #fff;
+$black: #000;
+$primary-color: #357bf7;
 $dark-grey: rgb(52, 58, 64);
+$light-grey: hsl(0, 0%, 93%);
 
 // Buttons
 
-$border-light-red: 1px solid rgb(255, 0, 0, 0.5);
-$border-light-primary: 1px solid rgb(53, 123, 247, 0.5);
-$border-grey: 1px solid rgb(0, 0, 0, 0.11);
-$red: #FF0000;
+$border-light-red: 1px solid rgb(255, 0, 0, .5);
+$border-light-primary: 1px solid rgb(53, 123, 247, .5);
+$border-grey: 1px solid rgb(0, 0, 0, .11);
+$red: #f00;
 
 // Social icons
 
-$discord: #7289DA;
-$youtube: #FF0000;
-$twitter: #009DED;
-$twitch: #9244FF;
+$discord: #7289da;
+$youtube: $red;
+$twitter: #009ded;
+$twitch: #9244ff;
+
+$input-border: rgba(0, 0, 0, .125);
