@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Edit my organization
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="section-bg">
+      <h2>Edit my organization</h2>
+    <hr>
+    <div class="mt-3">
+      {% include 'organizations/includes/_edit_organization_form.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function() {
+    $('img#current-avatar').click(function() {
+      $('input[type="file"]').click();
+    });
+  });
+</script>
+{% endblock %}

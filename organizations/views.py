@@ -3,13 +3,59 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib import messages
 
 from .decorators import is_owner
-from .forms import OrganizationForm
+from .forms import OrganizationForm, EditOrganizationForm
 from .forms import TeamForm
 from .models import Organization
 from .models import Team
 from users.models import User
+
+
+@is_owner
+@login_required
+def edit_organization(request, organization_slug):
+    """User profile view
+
+    This view is used for handling GET and POST request to display and update the
+    user.
+    """
+    context = dict()
+    organization = Organization.objects.get(slug=organization_slug)
+    if request.method == 'POST':
+        import ipdb; ipdb.set_trace()
+        form = EditOrganizationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            kwargs = {
+                'organization_slug': organization_slug,
+            }
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Organization updated successfully',
+            )
+            return redirect(reverse('organizations:detail_organization', kwargs=kwargs))
+        else:
+            messages.add_message(request, messages.ERROR, 'Mistakes were made')
+
+    form_data = {
+        'name': organization.name,
+        'short_name': organization.short_name,
+        'description': organization.description,
+        'logo': organization.logo,
+        'website': organization.website,
+        'twitch': organization.twitch,
+        'twitter': organization.twitter,
+        'reddit': organization.reddit,
+        'instagram': organization.instagram,
+        'youtube': organization.youtube,
+    }
+    context = {
+        'form': EditOrganizationForm(initial=form_data),
+    }
+    return render(request, 'organizations/edit_organization.html', context)
 
 
 @login_required

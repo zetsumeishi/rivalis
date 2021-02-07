@@ -1,0 +1,77 @@
+<form method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+  <div class="row">
+
+  <div class="col-12 col-md-8">
+    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}*</label>
+    {{ form.name }}
+  </div>
+  <div class="col-12 col-md-4">
+    <label for="{{ form.short_name.id_for_label }}">{{ form.short_name.label }}</label>
+    {{ form.short_name }}
+  </div>
+</div>
+  <div class="col-12">
+    <label for="{{ form.website.id_for_label }}">{{ form.website.label }}</label>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fas fa-globe"></i>
+      </div>
+      {{ form.website }}
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="{{ form.twitch.id_for_label }}">{{ form.twitch.label }}</label>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-twitch"></i>
+      </div>
+      {{ form.twitch }}
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="{{ form.youtube.id_for_label }}">{{ form.youtube.label }}</label>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-youtube"></i>
+      </div>
+      {{ form.youtube }}
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="{{ form.twitter.id_for_label }}">{{ form.twitter.label }}</label>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-twitter"></i>
+      </div>
+      {{ form.twitter }}
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="{{ form.instagram.id_for_label }}">{{ form.instagram.label }}</label>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-instagram"></i>
+      </div>
+      {{ form.instagram }}
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="{{ form.reddit.id_for_label }}">{{ form.reddit.label }}</label>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-reddit"></i>
+      </div>
+      {{ form.reddit }}
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+    {{ form.description }}
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-8 mt-4 offset-md-2">
+      <button class="btn btn-md rivalis-button-primary w-100 mb-3">Edit</button>
+    </div>
+  </div>
+</form>

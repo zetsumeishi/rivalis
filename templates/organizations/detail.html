@@ -21,6 +21,9 @@
         <a href="{% url 'organizations:create_team' %}">
           <button class="btn rivalis-button-inverted mb-3">Create team</button>
         </a>
+        <a href="{% url 'organizations:edit_organization' organization.slug %}">
+          <button class="btn rivalis-button-inverted mb-3">Edit organization</button>
+        </a>
       </div>
       {% endif %}
     </div>

@@ -5,6 +5,7 @@ from .models import Organization
 from .models import Team
 from .models import TeamMembership
 from disciplines.models import Discipline
+from users.forms import ImageWidget
 
 
 class OrganizationForm(forms.ModelForm):
@@ -79,3 +80,23 @@ class TeamForm(forms.ModelForm):
             membership = TeamMembership(user=owner, team=team, role='owner')
             membership.save()
         return team
+
+
+class EditOrganizationForm(forms.ModelForm):
+    class Meta:
+        model = Organization
+        fields = ['name', 'short_name', 'description', 'website', 'twitch', 'youtube', 'instagram', 'twitter', 'reddit', 'logo']
+
+    logo = forms.ImageField(widget=ImageWidget)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].disabled = True
+        self.fields['description'].widget.attrs.update({'placeholder': 'Description'})
+        self.fields['short_name'].widget.attrs.update({'placeholder': 'Short name'})
+        self.fields['website'].widget.attrs.update({'placeholder': 'Website'})
+        self.fields['twitch'].widget.attrs.update({'placeholder': 'Twitch'})
+        self.fields['youtube'].widget.attrs.update({'placeholder': 'Youtube'})
+        self.fields['instagram'].widget.attrs.update({'placeholder': 'Instagram'})
+        self.fields['twitter'].widget.attrs.update({'placeholder': 'Twitter'})
+        self.fields['reddit'].widget.attrs.update({'placeholder': 'Reddit'})
