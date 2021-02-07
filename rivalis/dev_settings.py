@@ -43,4 +43,6 @@ DATABASES = {
 # Emails
 
 # Prints the email content in the terminal
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
