@@ -24,7 +24,6 @@ def edit_organization(request, organization_slug):
     context = dict()
     organization = Organization.objects.get(slug=organization_slug)
     if request.method == 'POST':
-        import ipdb; ipdb.set_trace()
         form = EditOrganizationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
