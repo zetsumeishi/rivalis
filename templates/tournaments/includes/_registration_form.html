@@ -1,0 +1,12 @@
+<form method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.team.id_for_label }}">{{ form.team.label }}</label>
+      {{ form.team }}
+    </div>
+  <div class="row">
+    <div class="col-12 col-md-8 mt-4 offset-md-2">
+      <button class="btn btn-md rivalis-button-primary w-100 mb-3">Create</button>
+    </div>
+  </div>
+</form>
