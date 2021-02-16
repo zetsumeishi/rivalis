@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load team_owner %}
+
+{% block title %}
+  {{ tournament.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="section-bg">
+    <div class="row">
+      <h2>{{ tournament.name }}</h2>
+    </div>
+    <hr>
+    <div class="row mt-5">
+      <div class="col-xs-12 col-lg-5 grid-justify-center">
+        <h3>GAME</h3>
+        <img src="{% static 'img/disciplines/' %}{{ tournament.discipline.slug }}_logo.svg" alt="{{ tournament.discipline.name }}" height="80px" class="mr-2">
+      </div>
+      <div class="col-xs-12 col-lg-5 grid-justify-center">
+        <h3>PARTICIPANTS</h3>
+        <ul class="p-0 mt-3 text-center">
+          {% for participant in tournament.accepted_participants %}
+            <li>{{ participant.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% if tournament.registration_is_open %}
+        <div class="col-xs-12 col-lg-2 grid-justify-center">
+          <a href="#">
+            <button class="btn btn-md rivalis-button-primary w-100 mt-5">Participate</button>
+          </a>
+          <a href="{% url 'tournaments:manage_tournament' tournament.slug %}">
+            <button class="btn btn-md rivalis-button-primary w-100 mt-5">Manage</button>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Organized by {{ tournament.organizer.name }}</p>
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Size: {{ tournament.size }}</p>
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Region: {{ tournament.region }}</p>
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Description: {{ tournament.description }}</p>
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Rules: {{ tournament.rules }}</p>
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Prizes: {{ tournament.prizes }}</p>
+    </div>
+    <div class="col-xs-12 grid-justify-center">
+      <p>Rules: {{ tournament.rules }}</p>
+    </div>
+  </div>
+  <div id="bracket"></div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function() {
+    var data = {
+      teams: {{teams_js|safe}},
+      results: {{results_js|safe}},
+    }
+
+    $(function() {
+      $('div#bracket').bracket({
+        skipConsolationRound: true,
+        skipGrandFinalComeback: true,
+        init: data
+      })
+    })
+  });
+</script>
+{% endblock %}
