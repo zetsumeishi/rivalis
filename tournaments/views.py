@@ -1,13 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from .constants import REJECTED
 from .controllers import BracketController
 from .forms import RegistrationForm
 from .forms import TournamentForm
 from .models import Tournament
+from .models import TournamentMembership
+from organizations.models import Team
 
 
 @login_required
@@ -66,3 +70,30 @@ def tournaments(request):
 
     context = {'tournaments': tournaments}
     return render(request, 'tournaments/tournaments.html', context)
+
+
+def manage_tournament(request, tournament_slug):
+    tournament = Tournament.objects.get(slug=tournament_slug)
+    context = {
+        'tournament': tournament,
+    }
+    return render(request, 'tournaments/manage_tournament.html', context)
+
+
+@login_required
+def reject_participant(request):
+    if request.is_ajax():
+        participant_id = request.GET.get('participant_id', None)
+        tournament_slug = request.GET.get('tournament_slug', None)
+        participant = Team.objects.get(pk=int(participant_id))
+        tournament_membership = TournamentMembership.objects.get(
+            tournament__slug=tournament_slug,
+            team=participant,
+        )
+        tournament_membership.status = REJECTED
+        tournament_membership.save(update_fields=['status'])
+        response = {
+            'id': str(participant_id),
+        }
+        return JsonResponse(response, status=200)
+    return redirect(request.META.get('HTTP_REFERER'))

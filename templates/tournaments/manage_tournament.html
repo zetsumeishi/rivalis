@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load team_status %}
+
+{% block title %}
+  {{ tournament.name }}
+{% endblock %}
+
+{% block content %}
+  <div style="margin-top: 100px;">
+    {% for participant in tournament.participants.all %}
+      <div class="row">
+        <p>{{ participant.name }} | <span class="team-status-{{ participant.id }}">{{ participant|team_status:tournament }}</span></p>
+        <button id="{{ participant.id }}" class="btn rivalis-button-red reject-participant" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.reject-participant').click(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: "{% url 'tournaments:reject_participant' %}",
+        type: 'GET',
+        data: {
+          'participant_id': this.id,
+          'tournament_slug': '{{ tournament.slug }}',
+        },
+        success: function(res) {
+          $('.team-status-' + res["id"]).text("rejected");
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}
