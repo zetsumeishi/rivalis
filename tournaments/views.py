@@ -1,7 +1,34 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse
 
 from .controllers import BracketController
+from .forms import TournamentForm
 from .models import Tournament
+
+
+@login_required
+def create_tournament(request):
+    """User profile view
+
+    This view is used for handling GET and POST request to display and update the
+    user.
+    """
+    if request.method == 'POST':
+        form = TournamentForm(request.POST, request=request)
+        if form.is_valid():
+            tournament = form.save()
+            kwargs = {
+                'tournament_slug': tournament.slug,
+            }
+            return redirect(reverse('tournaments:detail_tournament', kwargs=kwargs))
+        else:
+            messages.add_message(request, messages.ERROR, 'Mistakes were made')
+    form = TournamentForm(request=request)
+    context = {'form': form}
+    return render(request, 'tournaments/create.html', context)
 
 
 def detail_tournament(request, tournament_slug):

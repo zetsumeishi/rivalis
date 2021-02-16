@@ -1,0 +1,44 @@
+<form method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+      {{ form.name }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+      {{ form.description }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.region.id_for_label }}">{{ form.region.label }}</label>
+      {{ form.region }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.prizes.id_for_label }}">{{ form.prizes.label }}</label>
+      {{ form.prizes }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.rules.id_for_label }}">{{ form.rules.label }}</label>
+      {{ form.rules }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.size.id_for_label }}">{{ form.size.label }}</label>
+      {{ form.size }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.discipline.id_for_label }}">{{ form.discipline.label }}</label>
+      {{ form.discipline }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.format.id_for_label }}">{{ form.format.label }}</label>
+      {{ form.format }}
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <label for="{{ form.organizer.id_for_label }}">{{ form.organizer.label }}</label>
+      {{ form.organizer }}
+    </div>
+  <div class="row">
+    <div class="col-12 col-md-8 mt-4 offset-md-2">
+      <button class="btn btn-md rivalis-button-primary w-100 mb-3">Create</button>
+    </div>
+  </div>
+</form>
