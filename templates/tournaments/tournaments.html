@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Browse tournaments
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  {% for tournament in tournaments %}
+    <p><a href="{% url 'tournaments:detail_tournament' tournament.slug%}">{{tournament.name}}</a></p>
+  {% endfor %}
+</div>
+{% endblock %}
