@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'organizations.apps.OrganizationsConfig',
     'disciplines.apps.DisciplinesConfig',
+    'tournaments.apps.TournamentsConfig',
     # Packages
     'django_cleanup.apps.CleanupConfig',
 ]
