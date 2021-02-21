@@ -5,7 +5,26 @@ header {
   }
 
   & .carousel-item {
+    background-position: center center;
+    background-size: cover;
     height: 100vh;
     min-height: 400px;
+  }
+
+  & .slide1 {
+    background-image: url('/static/img/carousel_organizers.jpeg');
+  }
+
+  & .slide2 {
+    background-image: url('/static/img/carousel_players.jpeg');
+  }
+
+  & .slide3 {
+    background-image: url('/static/img/carousel_non_profit.jpg');
+  }
+
+  & .caption {
+    color: $white;
+    font-size: 3em;
   }
 }

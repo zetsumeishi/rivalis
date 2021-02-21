@@ -47,43 +47,70 @@ input[type=file] {
   padding: 50px;
 }
 
-nav.navbar {
-  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+nav,
+footer {
   background-color: #fff;
-  height: 85px;
+  height: 80px;
 }
-nav.navbar i.fab {
-  color: #343a40;
-  transition: color 0.5s;
-}
-nav.navbar i.fa-discord:hover {
-  color: #7289da;
-}
-nav.navbar i.fa-youtube:hover {
-  color: #f00;
-}
-nav.navbar i.fa-twitter:hover {
-  color: #009ded;
-}
-nav.navbar i.fa-twitch:hover {
-  color: #9244ff;
-}
-nav.navbar a {
+nav a,
+footer a {
   color: #000;
   font-weight: 600;
   line-height: 1.5em;
   text-transform: uppercase;
 }
-nav.navbar a:hover {
+nav a:hover,
+footer a:hover {
   color: #357bf7;
 }
-nav.navbar .navbar-brand {
+nav .fab,
+footer .fab {
+  color: #343a40;
+  transition: color 0.5s;
+}
+nav .fa-discord:hover,
+footer .fa-discord:hover {
+  color: #7289da;
+}
+nav .fa-youtube:hover,
+footer .fa-youtube:hover {
+  color: #f00;
+}
+nav .fa-twitter:hover,
+footer .fa-twitter:hover {
+  color: #009ded;
+}
+nav .fa-twitch:hover,
+footer .fa-twitch:hover {
+  color: #9244ff;
+}
+
+nav {
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+nav a {
+  color: #000;
+  font-weight: 600;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+nav a:hover {
+  color: #357bf7;
+}
+nav .navbar-brand {
   color: #357bf7;
   font-family: "Josefin Sans", "Open Sans", sans-serif;
   font-size: 2em;
   letter-spacing: -0.1em;
+}
+
+footer {
+  height: 100px;
+}
+footer .nav-link {
+  padding: 0 !important;
 }
 
 input[type=text],
@@ -194,8 +221,23 @@ header img {
   object-fit: cover;
 }
 header .carousel-item {
+  background-position: center center;
+  background-size: cover;
   height: 100vh;
   min-height: 400px;
+}
+header .slide1 {
+  background-image: url("/static/img/carousel_organizers.jpeg");
+}
+header .slide2 {
+  background-image: url("/static/img/carousel_players.jpeg");
+}
+header .slide3 {
+  background-image: url("/static/img/carousel_non_profit.jpg");
+}
+header .caption {
+  color: #fff;
+  font-size: 3em;
 }
 
 #email-header {

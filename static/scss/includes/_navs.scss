@@ -1,36 +1,51 @@
-nav.navbar {
-  @include box-shadow(0, 2px, 4px, rgb(0, 0, 0, .2));
+nav,
+footer {
   background-color: $white;
-  height: 85px;
+  height: 80px;
 
-  & i.fab {
+  & a {
+    color: $black;
+    font-weight: 600;
+    line-height: 1.5em;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  & .fab {
     color: $dark-grey;
     transition: color .5s;
   }
 
-  & i.fa-discord {
+  & .fa-discord {
     &:hover {
       color: $discord;
     }
   }
 
-  & i.fa-youtube {
+  & .fa-youtube {
     &:hover {
       color: $youtube;
     }
   }
 
-  & i.fa-twitter {
+  & .fa-twitter {
     &:hover {
       color: $twitter;
     }
   }
 
-  & i.fa-twitch {
+  & .fa-twitch {
     &:hover {
       color: $twitch;
     }
   }
+}
+
+nav {
+  @include box-shadow(0, 2px, 4px, rgb(0, 0, 0, .2));
 
   & a {
     color: $black;
@@ -48,5 +63,13 @@ nav.navbar {
     font-family: 'Josefin Sans', 'Open Sans', sans-serif;
     font-size: 2em;
     letter-spacing: -.1em;
+  }
+}
+
+footer {
+  height: 100px;
+
+  & .nav-link {
+    padding: 0 !important;
   }
 }
