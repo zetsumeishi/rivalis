@@ -109,6 +109,9 @@ nav .navbar-brand {
 footer {
   height: 100px;
 }
+footer p {
+  text-transform: uppercase;
+}
 footer .nav-link {
   padding: 0 !important;
 }
@@ -241,8 +244,8 @@ header .caption {
 }
 
 #email-header {
-  height: 150px;
   background-color: #357bf7;
+  height: 150px;
 }
 #email-header > h1 {
   color: #fff;
