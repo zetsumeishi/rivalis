@@ -200,6 +200,11 @@ select {
   color: #f00 !important;
 }
 
+.rivalis-button-square {
+  height: 50px;
+  width: 50px;
+}
+
 .card-form {
   border-radius: 0.5em;
 }

@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from .constants import ACCEPTED
 from .constants import REJECTED
 from .controllers import BracketController
 from .forms import RegistrationForm
@@ -80,7 +81,6 @@ def manage_tournament(request, tournament_slug):
     return render(request, 'tournaments/manage_tournament.html', context)
 
 
-@login_required
 def reject_participant(request):
     if request.is_ajax():
         participant_id = request.GET.get('participant_id', None)
@@ -91,6 +91,24 @@ def reject_participant(request):
             team=participant,
         )
         tournament_membership.status = REJECTED
+        tournament_membership.save(update_fields=['status'])
+        response = {
+            'id': str(participant_id),
+        }
+        return JsonResponse(response, status=200)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+def accept_participant(request):
+    if request.is_ajax():
+        participant_id = request.GET.get('participant_id', None)
+        tournament_slug = request.GET.get('tournament_slug', None)
+        participant = Team.objects.get(pk=int(participant_id))
+        tournament_membership = TournamentMembership.objects.get(
+            tournament__slug=tournament_slug,
+            team=participant,
+        )
+        tournament_membership.status = ACCEPTED
         tournament_membership.save(update_fields=['status'])
         response = {
             'id': str(participant_id),

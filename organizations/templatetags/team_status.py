@@ -20,4 +20,4 @@ def team_status(team, tournament):
         tournament=tournament,
         team=team,
     )
-    return tournament_membership.status
+    return tournament_membership.status.title()

@@ -12,10 +12,17 @@
   <div style="margin-top: 100px;">
     {% for participant in tournament.participants.all %}
       <div class="row">
-        <p>{{ participant.name }} | <span class="team-status-{{ participant.id }}">{{ participant|team_status:tournament }}</span></p>
-        <button id="{{ participant.id }}" class="btn rivalis-button-red reject-participant" type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        {% with registration_status=participant|team_status:tournament %}
+          <p>{{ participant.name }} | <span class="team-status-{{ participant.id }}">{{ registration_status }}</span></p>
+          {% if registration_status == "Waiting" %}
+            <button id="{{ participant.id }}" class="btn rivalis-button-primary rivalis-button-square accept-participant" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">✓</span>
+            </button>
+            <button id="{{ participant.id }}" class="btn rivalis-button-red rivalis-button-square reject-participant" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          {% endif %}
+        {% endwith %}
       </div>
     {% endfor %}
   </div>
@@ -34,7 +41,21 @@
           'tournament_slug': '{{ tournament.slug }}',
         },
         success: function(res) {
-          $('.team-status-' + res["id"]).text("rejected");
+          $('.team-status-' + res["id"]).text("Rejected");
+        }
+      });
+    });
+    $('.accept-participant').click(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: "{% url 'tournaments:accept_participant' %}",
+        type: 'GET',
+        data: {
+          'participant_id': this.id,
+          'tournament_slug': '{{ tournament.slug }}',
+        },
+        success: function(res) {
+          $('.team-status-' + res["id"]).text("Accepted");
         }
       });
     });
