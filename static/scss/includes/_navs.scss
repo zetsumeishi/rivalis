@@ -1,11 +1,10 @@
 nav,
 footer {
   background-color: $white;
-  height: 80px;
+  font-weight: bold;
 
   & a {
-    color: $black;
-    font-weight: 600;
+    color: $dark-grey;
     line-height: 1.5em;
     text-transform: uppercase;
 
@@ -46,10 +45,10 @@ footer {
 
 nav {
   @include box-shadow(0, 2px, 4px, rgb(0, 0, 0, .2));
+  height: 80px;
 
   & a {
-    color: $black;
-    font-weight: 600;
+    color: $dark-grey;
     line-height: 1.5em;
     text-transform: uppercase;
 
@@ -67,8 +66,6 @@ nav {
 }
 
 footer {
-  height: 100px;
-
   & p {
     text-transform: uppercase;
   }
