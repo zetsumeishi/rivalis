@@ -51,7 +51,10 @@ class Tournament(models.Model):
 
     @property
     def accepted_participants(self):
-        return Team.objects.filter(tournamentmembership__status=ACCEPTED)
+        return Team.objects.filter(
+            tournamentmembership__status=ACCEPTED,
+            tournament=self,
+        )
 
 
 class TournamentMembership(models.Model):
