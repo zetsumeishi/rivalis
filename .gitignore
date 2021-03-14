@@ -140,3 +140,6 @@ emails-debug/
 
 #  PyCharm
 .idea/
+
+# SonarQube
+.scannerwork/
