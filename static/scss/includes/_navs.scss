@@ -1,5 +1,5 @@
-nav,
-footer {
+footer,
+nav {
   background-color: $white;
   font-weight: bold;
 
@@ -66,6 +66,7 @@ nav {
 }
 
 footer {
+
   & p {
     text-transform: uppercase;
   }

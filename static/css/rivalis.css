@@ -4,6 +4,7 @@ body {
   color: #343a40;
   font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 16px;
+  padding-top: 80px;
 }
 
 h1,
@@ -47,40 +48,40 @@ input[type=file] {
   padding: 50px;
 }
 
-nav,
-footer {
+footer,
+nav {
   background-color: #fff;
   font-weight: bold;
 }
-nav a,
-footer a {
+footer a,
+nav a {
   color: #343a40;
   line-height: 1.5em;
   text-transform: uppercase;
 }
-nav a:hover,
-footer a:hover {
+footer a:hover,
+nav a:hover {
   color: #357bf7;
 }
-nav .fab,
-footer .fab {
+footer .fab,
+nav .fab {
   color: #343a40;
   transition: color 0.5s;
 }
-nav .fa-discord:hover,
-footer .fa-discord:hover {
+footer .fa-discord:hover,
+nav .fa-discord:hover {
   color: #7289da;
 }
-nav .fa-youtube:hover,
-footer .fa-youtube:hover {
+footer .fa-youtube:hover,
+nav .fa-youtube:hover {
   color: #f00;
 }
-nav .fa-twitter:hover,
-footer .fa-twitter:hover {
+footer .fa-twitter:hover,
+nav .fa-twitter:hover {
   color: #009ded;
 }
-nav .fa-twitch:hover,
-footer .fa-twitch:hover {
+footer .fa-twitch:hover,
+nav .fa-twitch:hover {
   color: #9244ff;
 }
 
@@ -226,6 +227,11 @@ select {
   }
   footer ul {
     margin: 1em 0;
+  }
+
+  #profile-information {
+    margin-top: 1em;
+    text-align: center;
   }
 }
 @media (min-width: 768px) {

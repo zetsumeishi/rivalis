@@ -17,10 +17,10 @@ My profile
       </div>
       <hr>
       <div class="row mt-3">
-        <div class="col-xs-12 col-md-2">
+        <div class="col-xs-12 col-md-3">
           <img src="{{ request.user.avatar.url }}" alt="{{request.user.username}}" width="100%" height="auto">
         </div>
-        <div class="col-xs-12 col-md-3">
+        <div id="profile-information" class="col-xs-12 col-md-5">
           <h3>{{ request.user.username }}</h3>
           <p class="mb-0">{{ request.user.email }}</p>
           {% if request.user.riot_tag %}
@@ -30,7 +30,7 @@ My profile
           {% endif %}
           <p class="mb-0">{{ request.user.timezone }}</p>
         </div>
-        <div class="col-xs-12 col-md-3 offset-lg-4 mt-5">
+        <div class="col-xs-12 col-lg-4 mt-5">
           <a href="{% url 'users:password_change' %}"><button class="btn btn-md rivalis-button-primary w-100 mb-3">Change my password</button></a>
           <a href="{% url 'users:edit_profile' %}"><button class="btn btn-md rivalis-button-primary w-100 mb-3">Edit my account</button></a>
           <a href="{% url 'users:delete_account' %}"><button class="btn btn-md rivalis-button-red w-100">Delete my account</button></a>
