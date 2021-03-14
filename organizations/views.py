@@ -1,12 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.contrib import messages
 
 from .decorators import is_owner
-from .forms import OrganizationForm, EditOrganizationForm
+from .forms import EditOrganizationForm
+from .forms import OrganizationForm
 from .forms import TeamForm
 from .models import Organization
 from .models import Team
@@ -21,7 +22,6 @@ def edit_organization(request, organization_slug):
     This view is used for handling GET and POST request to display and update the
     user.
     """
-    context = dict()
     organization = Organization.objects.get(slug=organization_slug)
     if request.method == 'POST':
         form = EditOrganizationForm(request.POST, request.FILES)

@@ -103,7 +103,7 @@ class UsersViewsTests(TestCase):
             'password2': password,
             'timezone': timezone,
         }
-        response = self.client.post(url, payload, follow=True)
+        _ = self.client.post(url, payload, follow=True)
 
         with self.assertRaises(ObjectDoesNotExist):
             self.User.objects.get(email=email)

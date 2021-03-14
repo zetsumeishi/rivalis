@@ -78,13 +78,13 @@ class TournamentForm(ModelForm):
                 round_name = 'Quarterfinals'
             else:
                 round_name = f'Round {round_number}'
-            round = Round(
+            new_round = Round(
                 name=round_name,
                 first_round=first_round,
                 number=round_number,
                 stage=stage,
             )
-            round.save()
+            new_round.save()
 
 
 class RegistrationForm(Form):

@@ -80,7 +80,6 @@ def login(request):
             user = authenticate(request, **credentials)
             if user:
                 signin(request, user)
-                context = {'user': user}
                 return HttpResponseRedirect('/')
     else:
         form = UserAuthenticationForm()
@@ -106,7 +105,6 @@ def signup(request):
             }
             user = User.objects.create_user(email=email, password=password, **data)
             signin(request, user)
-            context = {'user': user}
             return HttpResponseRedirect('/')
     else:
         form = UserCreationForm()

@@ -11,7 +11,7 @@ class UsersTemplatetagsTests(TestCase):
 
     def setUp(self):
         # Creating 5 users
-        members = [UserFactory() for i in range(5)]
+        members = [UserFactory() for _ in range(5)]
 
         # Creating a team with the 5 newly created users
         self.team = TeamFactory(members=members)
