@@ -50,7 +50,7 @@ class Tournament(models.Model):
         tournament_memberships = TournamentMembership.objects.filter(
             tournament=self,
             status=ACCEPTED,
-        )
+        ).count()
         return tournament_memberships == self.size
 
     @property
