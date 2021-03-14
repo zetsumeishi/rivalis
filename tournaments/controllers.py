@@ -3,6 +3,7 @@ from .constants import NB_MATCHES_PER_ROUND_LB
 from .constants import SINGLE_ELIMINATION
 from .constants import SIZES_ROUNDS
 from .models import Match
+from .models import Round
 from .models import Stage
 
 
@@ -17,6 +18,18 @@ class BracketController:
             return self._single_elimination(empty=empty)
         if self.stage.format == DOUBLE_ELIMINATION:
             return self._double_elimination(empty=empty)
+
+    def start_tournament(self):
+        first_round = Round.objects.get(first_round=True, stage=self.stage)
+        participants = self.tournament.participants.all()
+        for idx, team in enumerate(participants):
+            if idx % 2 == 0:
+                match = Match(
+                    home_team=participants[idx],
+                    away_team=participants[idx + 1],
+                    round=first_round,
+                )
+                match.save()
 
     def _single_elimination(self, empty=False):
         nb_rounds = SIZES_ROUNDS[self.tournament.size]

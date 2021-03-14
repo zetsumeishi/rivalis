@@ -103,8 +103,8 @@ class Round(models.Model):
 
 class Match(models.Model):
     # Fields
-    away_score = models.IntegerField('Away score')
-    home_score = models.IntegerField('Home score')
+    away_score = models.IntegerField('Away score', null=True)
+    home_score = models.IntegerField('Home score', null=True)
 
     # Relationships
     away_team = models.ForeignKey(

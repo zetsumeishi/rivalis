@@ -3,8 +3,10 @@ from django.forms import Form
 from django.forms import ModelForm
 from slugify import slugify
 
+from .constants import SIZES_ROUNDS
 from .constants import STAGE_FORMAT_CHOICES
 from .constants import WAITING
+from .models import Round
 from .models import Stage
 from .models import Tournament
 from .models import TournamentMembership
@@ -61,7 +63,28 @@ class TournamentForm(ModelForm):
             tournament.save()
             stage = Stage(tournament=tournament, format=stage_format)
             stage.save()
+            self._generate_rounds(tournament, stage)
         return tournament
+
+    def _generate_rounds(self, tournament, stage):
+        for round_number in range(SIZES_ROUNDS[tournament.size] + 1):
+            first_round = False
+            if round_number == 1:
+                round_name = 'Finals'
+                first_round = True
+            elif round_number == 2:
+                round_name = 'Semifinals'
+            elif round_number == 3:
+                round_name = 'Quarterfinals'
+            else:
+                round_name = f'Round {round_number}'
+            round = Round(
+                name=round_name,
+                first_round=first_round,
+                number=round_number,
+                stage=stage,
+            )
+            round.save()
 
 
 class RegistrationForm(Form):

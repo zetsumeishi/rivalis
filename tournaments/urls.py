@@ -24,4 +24,9 @@ urlpatterns = [
         views.detail_tournament,
         name='detail_tournament',
     ),
+    path(
+        'start-tournament/<str:tournament_slug>',
+        views.start_tournament,
+        name='start_tournament',
+    ),
 ]
