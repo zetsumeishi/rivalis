@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 from .constants import ACCEPTED
 from .constants import REGION_CHOICES
@@ -14,6 +13,7 @@ from organizations.models import Team
 class Tournament(models.Model):
     # Fields
     description = models.TextField('Description', blank=True)
+    is_registration_open = models.BooleanField(default=True)
     name = models.CharField('Name', max_length=255)
     prizes = models.TextField('Prizes', blank=True)
     region = models.CharField(
@@ -40,10 +40,6 @@ class Tournament(models.Model):
         return (
             f'{self.name} by {self.organizer.name} on {self.discipline} | {self.region}'
         )
-
-    @property
-    def registration_is_open(self):
-        return self.start_date > timezone.now()
 
     @property
     def is_full(self):

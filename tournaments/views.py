@@ -39,7 +39,7 @@ def create_tournament(request):
 
 def detail_tournament(request, tournament_slug):
     tournament = Tournament.objects.get(slug=tournament_slug)
-    empty = tournament.registration_is_open
+    empty = tournament.is_registration_open
     controller = BracketController(tournament)
     teams_js, results_js = controller.build_bracket(empty=empty)
     context = {
