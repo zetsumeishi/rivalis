@@ -66,25 +66,5 @@
       <p>Rules: {{ tournament.rules }}</p>
     </div>
   </div>
-  <div id="bracket"></div>
 </div>
-{% endblock %}
-
-{% block javascript %}
-<script>
-  $(document).ready(function() {
-    var data = {
-      teams: {{teams_js|safe}},
-      results: {{results_js|safe}},
-    }
-
-    $(function() {
-      $('div#bracket').bracket({
-        skipConsolationRound: true,
-        skipGrandFinalComeback: true,
-        init: data
-      })
-    })
-  });
-</script>
 {% endblock %}
