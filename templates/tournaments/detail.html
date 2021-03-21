@@ -66,5 +66,31 @@
       <p>Rules: {{ tournament.rules }}</p>
     </div>
   </div>
+  {% if tournament.is_registration_open %}
+    <div class="section-bg">
+      <p>The tournament hasn't started yet.</p>
+    </div>
+  {% else %}
+    {% for round, matches in tournament_data.items %}
+    <div class="section-bg">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ round.name }}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for match in matches %}
+          <tr>
+            <td>
+              {{ match.home_team }} {{ match.home_score }} VS {{match.away_score }}{{ match.away_team }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  {% endif %}
 </div>
 {% endblock %}

@@ -118,6 +118,7 @@ class Match(models.Model):
         on_delete=models.CASCADE,
     )
     round = models.ForeignKey(Round, on_delete=models.CASCADE)
+    number = models.IntegerField(default=1)
 
     def __str__(self):
         return f'{self.home_team} VS {self.away_team}'

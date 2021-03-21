@@ -1,5 +1,3 @@
-import json
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -41,13 +39,14 @@ def create_tournament(request):
 
 def detail_tournament(request, tournament_slug):
     tournament = Tournament.objects.get(slug=tournament_slug)
-    empty = tournament.is_registration_open
-    controller = BracketController(tournament)
-    teams_js, results_js = controller.build_bracket(empty=empty)
+    tournament_data = dict()
+    if not tournament.is_registration_open:
+        controller = BracketController(tournament)
+        tournament_data = controller.build_bracket()
+
     context = {
         'tournament': tournament,
-        'teams_js': teams_js,
-        'results_js': results_js,
+        'tournament_data': tournament_data,
     }
     return render(request, 'tournaments/detail.html', context)
 
@@ -56,13 +55,12 @@ def start_tournament(request, tournament_slug):
     tournament = Tournament.objects.get(slug=tournament_slug)
     controller = BracketController(tournament)
     controller.start_tournament()
-    teams_js, results_js = controller.build_bracket(empty=False)
+    tournament_data = controller.build_bracket()
     tournament.is_registration_open = False
     tournament.save()
     context = {
         'tournament': tournament,
-        'teams_js': json.dumps(teams_js),
-        'results_js': json.dumps(results_js),
+        'tournament_data': tournament_data,
     }
     return render(request, 'tournaments/detail.html', context)
 
