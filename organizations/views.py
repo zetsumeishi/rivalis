@@ -16,19 +16,19 @@ from users.models import User
 
 @is_owner
 @login_required
-def edit_organization(request, organization_slug):
+def edit_organization(request, organization_id):
     """User profile view
 
     This view is used for handling GET and POST request to display and update the
     user.
     """
-    organization = Organization.objects.get(slug=organization_slug)
+    organization = Organization.objects.get(id=organization_id)
     if request.method == 'POST':
         form = EditOrganizationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             kwargs = {
-                'organization_slug': organization_slug,
+                'organization_id': organization_id,
             }
             messages.add_message(
                 request,
@@ -79,14 +79,14 @@ def create_organization(request):
         form = OrganizationForm(request.POST)
         if form.is_valid():
             organization = form.save(owner=request.user)
-            kwargs = {'organization_slug': organization.slug}
+            kwargs = {'organization_id': organization.id}
             return redirect(reverse('organizations:detail_organization', kwargs=kwargs))
     context['form'] = OrganizationForm()
     return render(request, 'organizations/create.html', context)
 
 
-def detail_organization(request, organization_slug):
-    organization = Organization.objects.get(slug=organization_slug)
+def detail_organization(request, organization_id):
+    organization = Organization.objects.get(id=organization_id)
     teams = Team.objects.filter(organization=organization)
 
     context = {
@@ -105,18 +105,18 @@ def create_team(request):
         if form.is_valid():
             team = form.save(owner=request.user)
             kwargs = {
-                'organization_slug': team.organization.slug,
-                'team_slug': team.slug,
+                'organization_id': team.organization.id,
+                'team_id': team.id,
             }
             return redirect(reverse('organizations:detail_team', kwargs=kwargs))
     context['form'] = TeamForm(request=request)
     return render(request, 'teams/create.html', context)
 
 
-def detail_team(request, organization_slug, team_slug):
-    organization = Organization.objects.get(slug=organization_slug)
+def detail_team(request, organization_id, team_id):
+    organization = Organization.objects.get(id=organization_id)
     team = Team.objects.get(
-        slug=team_slug,
+        id=team_id,
         organization=organization,
     )
 

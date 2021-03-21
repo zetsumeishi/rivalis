@@ -15,10 +15,9 @@ class OrganizationFactory(DjangoModelFactory):
 
     id = factory.Sequence(lambda n: n)
     name = factory.Faker('company')
-    slug = factory.LazyAttribute(lambda n: f'{slugify(n.name)}')
     short_name = factory.LazyAttribute(lambda n: f'{n.name[:3]}')
     description = fuzzy.FuzzyText(length=400)
-    twitch = factory.LazyAttribute(lambda n: f'https://twitter.com/{slugify(n.name)}')
+    twitch = factory.LazyAttribute(lambda n: f'https://twitch.com/{slugify(n.name)}')
     owner = factory.SubFactory('users.tests.factories.UserFactory')
 
 
@@ -31,7 +30,6 @@ class TeamFactory(DjangoModelFactory):
         OrganizationFactory,
     )
     name = factory.LazyAttribute(lambda n: f'{n.organization.name} {n.discipline.name}')
-    slug = factory.LazyAttribute(lambda n: f'{slugify(n.name)}')
 
     @factory.post_generation
     def members(self, create, extracted, **kwargs):

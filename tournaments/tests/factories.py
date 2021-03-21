@@ -26,7 +26,6 @@ class TournamentFactory(DjangoModelFactory):
     region = fuzzy.FuzzyChoice(REGION_CHOICES)
     rules = fuzzy.FuzzyText(length=400)
     size = 8
-    slug = factory.LazyAttribute(lambda n: f'rivalis-opens-{n.id}')
 
     # Relationships
     discipline = factory.SubFactory('disciplines.tests.factories.DisciplineFactory')

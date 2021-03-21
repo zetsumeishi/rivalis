@@ -1,10 +1,6 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse
-from slugify import slugify
 
-from organizations.models import Organization
-from organizations.models import Team
 from organizations.tests.factories import OrganizationFactory
 from organizations.tests.factories import TeamFactory
 from users.tests.factories import UserFactory
@@ -20,7 +16,7 @@ class OrganizationsViewsTests(TestCase):
         """Tests for organizations.views.detail_organization"""
 
         payload = {
-            'organization_slug': self.organization.slug,
+            'organization_id': self.organization.id,
         }
         url = reverse('organizations:detail_organization', kwargs=payload)
         self.client.force_login(self.owner)
@@ -37,7 +33,6 @@ class OrganizationsViewsTests(TestCase):
         self.client.force_login(self.owner)
         name = 'Rivalis'
         short_name = 'RIV'
-        slug = slugify(name)
         description = 'Description of team Rivalis.'
         twitch = 'https://twitch.com'
 
@@ -45,7 +40,6 @@ class OrganizationsViewsTests(TestCase):
         payload = {
             'name': '',
             'short_name': short_name,
-            'slug': slug,
             'description': description,
             'website': '',
             'twitch': twitch,
@@ -56,8 +50,6 @@ class OrganizationsViewsTests(TestCase):
         }
         response = self.client.post(url, payload)
 
-        with self.assertRaises(ObjectDoesNotExist):
-            Organization.objects.get(slug=slug)
         self.assertEqual(response.status_code, 200)
 
         # [POST] Create a team with valid args
@@ -69,7 +61,6 @@ class OrganizationsViewsTests(TestCase):
         self.assertTrue(organization)
         self.assertEqual(organization.name, name)
         self.assertEqual(organization.short_name, short_name)
-        self.assertEqual(organization.slug, slug)
         self.assertEqual(organization.twitch, twitch)
         self.assertEqual(organization.owner, self.owner)
 
@@ -77,8 +68,8 @@ class OrganizationsViewsTests(TestCase):
         """Tests for organizations.views.detail_team"""
 
         payload = {
-            'organization_slug': self.organization.slug,
-            'team_slug': self.team.slug,
+            'organization_id': self.organization.id,
+            'team_id': self.team.id,
         }
         url = reverse('organizations:detail_team', kwargs=payload)
         self.client.force_login(self.owner)
@@ -94,20 +85,16 @@ class OrganizationsViewsTests(TestCase):
         url = reverse('organizations:create_team')
         self.client.force_login(self.owner)
         name = 'Rivalis LoL'
-        slug = slugify(name)
         discipline = 'League of Legends'
 
         # [POST] Create a team with empty name
         payload = {
             'name': '',
-            'slug': slug,
             'organization': self.organization,
             'discipline': discipline,
         }
         response = self.client.post(url, payload)
 
-        with self.assertRaises(ObjectDoesNotExist):
-            Team.objects.get(slug=slug)
         self.assertEqual(response.status_code, 200)
 
         # [POST] Create a team with valid args
@@ -118,7 +105,6 @@ class OrganizationsViewsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(team)
         self.assertEqual(team.name, name)
-        self.assertEqual(team.slug, slug)
         self.assertEqual(team.discipline.name, discipline)
         self.assertTrue(team.members.all().exists())
 

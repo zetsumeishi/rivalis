@@ -1,5 +1,4 @@
 from django import forms
-from slugify import slugify
 
 from .models import Organization
 from .models import Team
@@ -37,7 +36,6 @@ class OrganizationForm(forms.ModelForm):
 
     def save(self, commit=True, owner=None):
         organization = super().save(commit=False)
-        organization.slug = slugify(organization.name)
         organization.owner = owner
         if commit:
             organization.save()
@@ -74,7 +72,6 @@ class TeamForm(forms.ModelForm):
 
     def save(self, commit=True, owner=None):
         team = super().save(commit=False)
-        team.slug = slugify(team.name)
         if commit:
             team.save()
             membership = TeamMembership(user=owner, team=team, role='owner')
@@ -85,7 +82,18 @@ class TeamForm(forms.ModelForm):
 class EditOrganizationForm(forms.ModelForm):
     class Meta:
         model = Organization
-        fields = ['name', 'short_name', 'description', 'website', 'twitch', 'youtube', 'instagram', 'twitter', 'reddit', 'logo']
+        fields = [
+            'name',
+            'short_name',
+            'description',
+            'website',
+            'twitch',
+            'youtube',
+            'instagram',
+            'twitter',
+            'reddit',
+            'logo',
+        ]
 
     logo = forms.ImageField(widget=ImageWidget)
 

@@ -6,7 +6,6 @@ from users.models import User
 
 class Organization(models.Model):
     name = models.CharField('Name', max_length=255)
-    slug = models.CharField('Slug', max_length=255)
     short_name = models.CharField('Short name', max_length=255)
     description = models.TextField('Description', blank=True)
     website = models.URLField('Website', blank=True)
@@ -28,7 +27,6 @@ class Organization(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.CharField(max_length=255)
     members = models.ManyToManyField(User, through='TeamMembership')
     discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)

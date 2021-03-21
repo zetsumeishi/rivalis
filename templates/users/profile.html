@@ -50,7 +50,7 @@ My profile
         </div>
         <div class="col-5">
           <p>
-            <a href="{% url 'organizations:detail_organization' organization.slug %}">
+            <a href="{% url 'organizations:detail_organization' organization.id %}">
             {{ organization.name }} | {{ organization.short_name }}
             </a>
           </p>
@@ -61,7 +61,7 @@ My profile
             {% for team in organization.team_set.all %}
             <li>
               <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="18px" class="mr-2">
-              <a href="{% url 'organizations:detail_team' team.organization.slug team.slug %}">
+              <a href="{% url 'organizations:detail_team' team.organization.id team.id %}">
                 {{ team.name }} | {{ team.discipline.name }}
               </a>
             </li>
@@ -90,7 +90,7 @@ My profile
         <div class="col-5">
           <p>
             <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="18px" class="mr-2">
-            <a href="{% url 'organizations:detail_team' team.organization.slug team.slug %}">
+            <a href="{% url 'organizations:detail_team' team.organization.id team.id %}">
               {{ team.name }} | {{ team.organization.short_name }}
             </a>
           </p>
