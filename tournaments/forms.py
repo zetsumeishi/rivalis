@@ -65,17 +65,12 @@ class TournamentForm(ModelForm):
         return tournament
 
     def _generate_rounds(self, tournament, stage):
-        for round_number in range(SIZES_ROUNDS[tournament.size] + 1):
+        nb_teams = tournament.size
+        for round_number in range(SIZES_ROUNDS[tournament.size]):
             first_round = False
-            if round_number == 1:
-                round_name = 'Finals'
+            if round_number == 0:
                 first_round = True
-            elif round_number == 2:
-                round_name = 'Semifinals'
-            elif round_number == 3:
-                round_name = 'Quarterfinals'
-            else:
-                round_name = f'Round {round_number}'
+            round_name = f'Round of {nb_teams}'
             new_round = Round(
                 name=round_name,
                 first_round=first_round,
@@ -83,6 +78,7 @@ class TournamentForm(ModelForm):
                 stage=stage,
             )
             new_round.save()
+            nb_teams = int(nb_teams / 2)
 
 
 class RegistrationForm(Form):
@@ -99,7 +95,7 @@ class RegistrationForm(Form):
             members__email=self.request.user.email,
         )
 
-    def save(self, tournament_id):
+    def save(self, tournament_id, commit=True):
         tournament = Tournament.objects.get(id=tournament_id)
         team = self.cleaned_data['team']
         if team not in tournament.participants.all():

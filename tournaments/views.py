@@ -10,6 +10,7 @@ from .constants import REJECTED
 from .controllers import BracketController
 from .forms import RegistrationForm
 from .forms import TournamentForm
+from .models import Match
 from .models import Tournament
 from .models import TournamentMembership
 from organizations.models import Team
@@ -39,8 +40,9 @@ def create_tournament(request):
 
 def detail_tournament(request, tournament_id):
     tournament = Tournament.objects.get(id=tournament_id)
+    matches = Match.objects.filter(round__stage__tournament=tournament)
     tournament_data = dict()
-    if not tournament.is_registration_open:
+    if not tournament.is_registration_open and matches:
         controller = BracketController(tournament)
         tournament_data = controller.build_bracket()
 
