@@ -133,3 +133,13 @@ def accept_participant(request):
         }
         return JsonResponse(response, status=200)
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+def match_detail(request, tournament_id, match_id):
+    tournament = Tournament.objects.get(id=tournament_id)
+    match = Match.objects.get(id=match_id)
+    context = {
+        'tournament': tournament,
+        'match': match,
+    }
+    return render(request, 'tournaments/match_detail.html', context)

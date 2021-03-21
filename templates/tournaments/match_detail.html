@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load team_owner %}
+
+{% block title %}
+  {{ tournament.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="section-bg">
+    <div class="row">
+      <div class="col">
+        <img src="{{ match.home_team.logo.url }}" alt="{{ match.home_team.name}}" height="150">
+        <p>{{ match.home_team.name }}</p>
+      </div>
+      <div class="col">
+        <h2>{{ match.home_score|default_if_none:"TBD" }}</h2>
+      </div><div class="col">
+        <h2>{{ match.away_score|default_if_none:"TBD" }}</h2>
+      </div>
+      <div class="col">
+        <img src="{{ match.away_team.logo.url }}" alt="{{ match.away_team.name}}" height="150">
+        <p>{{ match.away_team.name }}</p>
+      </div>
+  </div>
+</div>
+{% endblock %}

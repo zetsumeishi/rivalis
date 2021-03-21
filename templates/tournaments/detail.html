@@ -83,7 +83,9 @@
           {% for match in matches %}
           <tr>
             <td>
-              {{ match.home_team }} {{ match.home_score }} VS {{match.away_score }}{{ match.away_team }}
+              <a href="{% url 'tournaments:match_detail' tournament.id match.id %}">
+                {{ match.home_team }} {{ match.home_score|default_if_none:"TBD" }} VS {{match.away_score|default_if_none:"TBD" }}{{ match.away_team }}
+              </a>
             </td>
           </tr>
           {% endfor %}
