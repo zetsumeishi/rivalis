@@ -1,3 +1,5 @@
+from random import shuffle
+
 from .constants import SINGLE_ELIMINATION
 from .models import Match
 from .models import Round
@@ -17,6 +19,7 @@ class BracketController:
     def start_tournament(self):
         first_round = Round.objects.get(first_round=True, stage=self.stage)
         participants = self.tournament.participants.all()
+        shuffle(participants)
         for idx, team in enumerate(participants):
             if idx % 2 == 0:
                 match = Match(
