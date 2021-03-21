@@ -2,6 +2,7 @@
 source = .
 omit =
     .env/*
+    .venv/*
     home
     rivalis/*
     manage.py
