@@ -19,7 +19,7 @@ class BracketController:
     def start_tournament(self):
         first_round = Round.objects.get(first_round=True, stage=self.stage)
         participants = self.tournament.participants.all()
-        shuffle(participants)
+        shuffle(list(participants))
         for idx, team in enumerate(participants):
             if idx % 2 == 0:
                 match = Match(
