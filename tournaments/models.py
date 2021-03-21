@@ -28,7 +28,6 @@ class Tournament(models.Model):
         choices=SIZE_CHOICES,
         default=4,
     )
-    slug = models.CharField('Slug', max_length=255, unique=True)
     start_date = models.DateTimeField(auto_now_add=True)
 
     # Relationships

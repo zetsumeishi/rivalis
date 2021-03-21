@@ -24,7 +24,7 @@
             {% for tournament in tournaments %}
               <tr>
                 <th scope="row">
-                  <a href="{% url 'tournaments:detail_tournament' tournament.slug%}">{{tournament.name}}</a>
+                  <a href="{% url 'tournaments:detail_tournament' tournament.id %}">{{tournament.name}}</a>
                 </th>
                 <td>
                   <img src="{% static 'img/disciplines/' %}{{ tournament.discipline.slug }}_logo.svg" alt="{{ tournament.discipline.name }}" height="16px" class="mr-2">

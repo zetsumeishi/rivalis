@@ -10,22 +10,22 @@ urlpatterns = [
     path('reject-participant/', views.reject_participant, name='reject_participant'),
     path('accept-participant/', views.accept_participant, name='accept_participant'),
     path(
-        'tournament/<str:tournament_slug>/registration',
+        'tournament/<int:tournament_id>/registration',
         views.tournament_registration,
         name='tournament_registration',
     ),
     path(
-        'tournament/<str:tournament_slug>/manage',
+        'tournament/<int:tournament_id>/manage',
         views.manage_tournament,
         name='manage_tournament',
     ),
     path(
-        'tournament/<str:tournament_slug>/',
+        'tournament/<int:tournament_id>/',
         views.detail_tournament,
         name='detail_tournament',
     ),
     path(
-        'start-tournament/<str:tournament_slug>',
+        'start-tournament/<int:tournament_id>',
         views.start_tournament,
         name='start_tournament',
     ),

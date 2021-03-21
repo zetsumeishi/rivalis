@@ -40,7 +40,7 @@
         type: 'GET',
         data: {
           'participant_id': this.id,
-          'tournament_slug': '{{ tournament.slug }}',
+          'tournament_id': '{{ tournament.id }}',
         },
         success: function(res) {
           $('.team-status-' + res["id"]).text("Rejected");
@@ -54,7 +54,7 @@
         type: 'GET',
         data: {
           'participant_id': this.id,
-          'tournament_slug': '{{ tournament.slug }}',
+          'tournament_id': '{{ tournament.id }}',
         },
         success: function(res) {
           $('.team-status-' + res["id"]).text("Accepted");

@@ -33,12 +33,12 @@
           <a href="#">
             <button class="btn btn-md rivalis-button-primary w-100 mt-5">Participate</button>
           </a>
-          <a href="{% url 'tournaments:manage_tournament' tournament.slug %}">
+          <a href="{% url 'tournaments:manage_tournament' tournament.id %}">
             <button class="btn btn-md rivalis-button-primary w-100 mt-5">Manage</button>
           </a>
         </div>
       <div class="col-xs-12 col-lg-2 grid-justify-center">
-        <a href="{% url 'tournaments:start_tournament' tournament.slug %}">
+        <a href="{% url 'tournaments:start_tournament' tournament.id %}">
           <button class="btn btn-md rivalis-button-primary w-100 mt-5">Start</button>
         </a>
       </div>

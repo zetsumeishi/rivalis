@@ -27,7 +27,7 @@ def create_tournament(request):
         if form.is_valid():
             tournament = form.save()
             kwargs = {
-                'tournament_slug': tournament.slug,
+                'tournament_id': tournament.id,
             }
             return redirect(reverse('tournaments:detail_tournament', kwargs=kwargs))
         else:
@@ -37,8 +37,8 @@ def create_tournament(request):
     return render(request, 'tournaments/create.html', context)
 
 
-def detail_tournament(request, tournament_slug):
-    tournament = Tournament.objects.get(slug=tournament_slug)
+def detail_tournament(request, tournament_id):
+    tournament = Tournament.objects.get(id=tournament_id)
     tournament_data = dict()
     if not tournament.is_registration_open:
         controller = BracketController(tournament)
@@ -51,8 +51,8 @@ def detail_tournament(request, tournament_slug):
     return render(request, 'tournaments/detail.html', context)
 
 
-def start_tournament(request, tournament_slug):
-    tournament = Tournament.objects.get(slug=tournament_slug)
+def start_tournament(request, tournament_id):
+    tournament = Tournament.objects.get(id=tournament_id)
     controller = BracketController(tournament)
     controller.start_tournament()
     tournament_data = controller.build_bracket()
@@ -65,13 +65,13 @@ def start_tournament(request, tournament_slug):
     return render(request, 'tournaments/detail.html', context)
 
 
-def tournament_registration(request, tournament_slug):
+def tournament_registration(request, tournament_id):
     if request.method == 'POST':
         form = RegistrationForm(request.POST, request=request)
         if form.is_valid():
-            form.save(tournament_slug=tournament_slug)
+            form.save(tournament_id=tournament_id)
             kwargs = {
-                'tournament_slug': tournament_slug,
+                'tournament_id': tournament_id,
             }
             return redirect(reverse('tournaments:detail_tournament', kwargs=kwargs))
         else:
@@ -88,8 +88,8 @@ def tournaments(request):
     return render(request, 'tournaments/tournaments.html', context)
 
 
-def manage_tournament(request, tournament_slug):
-    tournament = Tournament.objects.get(slug=tournament_slug)
+def manage_tournament(request, tournament_id):
+    tournament = Tournament.objects.get(id=tournament_id)
     context = {
         'tournament': tournament,
     }
@@ -99,10 +99,10 @@ def manage_tournament(request, tournament_slug):
 def reject_participant(request):
     if request.is_ajax():
         participant_id = request.GET.get('participant_id', None)
-        tournament_slug = request.GET.get('tournament_slug', None)
-        participant = Team.objects.get(pk=int(participant_id))
+        tournament_id = request.GET.get('tournament_id', None)
+        participant = Team.objects.get(id=int(participant_id))
         tournament_membership = TournamentMembership.objects.get(
-            tournament__slug=tournament_slug,
+            tournament__id=tournament_id,
             team=participant,
         )
         tournament_membership.status = REJECTED
@@ -117,10 +117,10 @@ def reject_participant(request):
 def accept_participant(request):
     if request.is_ajax():
         participant_id = request.GET.get('participant_id', None)
-        tournament_slug = request.GET.get('tournament_slug', None)
-        participant = Team.objects.get(pk=int(participant_id))
+        tournament_id = request.GET.get('tournament_id', None)
+        participant = Team.objects.get(id=int(participant_id))
         tournament_membership = TournamentMembership.objects.get(
-            tournament__slug=tournament_slug,
+            tournament__id=tournament_id,
             team=participant,
         )
         tournament_membership.status = ACCEPTED

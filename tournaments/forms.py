@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import Form
 from django.forms import ModelForm
-from slugify import slugify
 
 from .constants import SIZES_ROUNDS
 from .constants import STAGE_FORMAT_CHOICES
@@ -57,7 +56,6 @@ class TournamentForm(ModelForm):
 
     def save(self, commit=True):
         tournament = super().save(commit=False)
-        tournament.slug = slugify(tournament.name)
         stage_format = self.cleaned_data['format']
         if commit:
             tournament.save()
@@ -101,8 +99,8 @@ class RegistrationForm(Form):
             members__email=self.request.user.email,
         )
 
-    def save(self, commit=True, tournament_slug=None):
-        tournament = Tournament.objects.get(slug=tournament_slug)
+    def save(self, commit=True, tournament_id=None):
+        tournament = Tournament.objects.get(id=tournament_id)
         data = {
             'tournament_id': tournament,
             'user': self.request.user,
