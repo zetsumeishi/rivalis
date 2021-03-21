@@ -99,11 +99,12 @@ class RegistrationForm(Form):
             members__email=self.request.user.email,
         )
 
-    def save(self, commit=True, tournament_id=None):
+    def save(self, tournament_id):
         tournament = Tournament.objects.get(id=tournament_id)
+        team = self.cleaned_data['team']
         data = {
-            'tournament_id': tournament,
-            'user': self.request.user,
+            'tournament_id': tournament.id,
+            'team_id': team.id,
             'status': WAITING,
         }
         team_registration = TournamentMembership(**data)
