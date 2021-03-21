@@ -54,10 +54,11 @@ def detail_tournament(request, tournament_id):
 def start_tournament(request, tournament_id):
     tournament = Tournament.objects.get(id=tournament_id)
     controller = BracketController(tournament)
-    controller.start_tournament()
+    if tournament.is_registration_open:
+        controller.start_tournament()
+        tournament.is_registration_open = False
+        tournament.save()
     tournament_data = controller.build_bracket()
-    tournament.is_registration_open = False
-    tournament.save()
     context = {
         'tournament': tournament,
         'tournament_data': tournament_data,
