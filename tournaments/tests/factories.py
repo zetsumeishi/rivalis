@@ -41,7 +41,6 @@ class TournamentMembershipFactory(DjangoModelFactory):
     id = factory.Sequence(lambda n: n)
     team = factory.SubFactory('organizations.tests.factories.TeamFactory')
     tournament = factory.SubFactory(TournamentFactory)
-    seed = team.id
 
 
 class StageFactory(DjangoModelFactory):

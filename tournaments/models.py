@@ -58,7 +58,6 @@ class Tournament(models.Model):
 
 
 class TournamentMembership(models.Model):
-    seed = models.IntegerField(default=0)
     status = models.CharField(
         'Status',
         max_length=12,
