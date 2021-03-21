@@ -1,10 +1,18 @@
 os: linux
 dist: focal
+
 language: python
 python:
   - 3.8
   - 3.9
   - 3.10-dev
+
+addons:
+  sonarcloud:
+    organization: "zetsumeishi"
+    token:
+      secure: "FyJb0ustTMuQMKnviLXrfjGClQ6AY5as26dVbEux0OcHCpFPKeijrzIWX5SeWWMvmFa9zXwTQw1cY+zxUkBio0H+V26lpU7jvIkVL6IIYIRx88M41LA7NJ6UXyi8yANhuMI83g9te+Scm6Mm3vofkHmd956BUZnMYS9d8sLuKeVbaR2zPuVwEiZBci927MS98FbLomqok8WK45zCSq/ofmwfV5Xo53qOS45NygkasRtNN0HmyZ5JFJOvOWLnSJnHCP8mR0atcyCT1T/8s9FJBtZ59wXj6EU6VkfNckAWkbXq9gwiT5lL6DfcjXSGehKnZkdelaNduHNpkpuuF5rbUd0zs+6rPtGAbu45Z0wmB+46m17zXJk2KaCxiBg4OoO6rYU2OIbxzwtsfaRisfOIx0aQAbwYljT+jd1hAzCh2Dtlldov4dSIJlcB6IrA+k3wP+PAQHMnzSX3sPgOPyGHOz46351y/bqlQ80avQJk9GbmY5WkrztbPjd1Hn//hp8m0DEXpJZlOjZa8DCAdBsIgB836+g4XKdVCWzqRNRfhmVsWa+ZKb3+s9iBfEBuArTYyKja+vyEvMs6CAlDre2tY3dLC9J0eLUaga5F1xG5CT7tAgfgdnM/g2Ibil3/GoJNB+V9wKWqi6YCnD70QRXs5jSf/ESgEFIL753+aBET0vs="
+
 install:
   - pip install -r requirements.txt
 
@@ -13,6 +21,7 @@ script:
   - ./clean_project.sh
   - ./manage.py collectstatic
   - coverage run -m manage test
+  - sonar-scanner
 
 after_success:
   - coveralls
