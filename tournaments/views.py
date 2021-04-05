@@ -85,7 +85,7 @@ def tournament_registration(request, tournament_id):
 
 
 def tournaments(request):
-    tournaments = Tournament.objects.all()
+    tournaments = Tournament.objects.all().order_by('start_date')
 
     context = {'tournaments': tournaments}
     return render(request, 'tournaments/tournaments.html', context)
