@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load tournament_status %}
 
 {% block title %}
   Browse tournaments
@@ -18,13 +19,16 @@
               <th scope="col">Size</th>
               <th scope="col">Starting date</th>
               <th scope="col">Organized by</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
             {% for tournament in tournaments %}
               <tr>
                 <th scope="row">
-                  <a href="{% url 'tournaments:detail_tournament' tournament.id %}">{{tournament.name}}</a>
+                  <a href="{% url 'tournaments:detail_tournament' tournament.id %}">
+                    {{tournament.name}}
+                  </a>
                 </th>
                 <td>
                   <img src="{% static 'img/disciplines/' %}{{ tournament.discipline.slug }}_logo.svg" alt="{{ tournament.discipline.name }}" height="16px" class="mr-2">
@@ -37,7 +41,12 @@
                   {{ tournament.start_date }}
                 </td>
                 <td>
-                  {{ tournament.organizer.name }}
+                  <a href="{% url 'organizations:detail_organization' tournament.organizer.id %}">
+                    {{ tournament.organizer.name }}
+                  </a>
+                </td>
+                <td>
+                  {{ tournament|tournament_status }}
                 </td>
               </tr>
             {% endfor %}
