@@ -13,6 +13,19 @@
     text-align: center;
   }
 }
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background-color: $white;
+    padding-top: 15px;
+    text-align: center;
+    @include box-shadow(0, 2px, 4px, rgb(0, 0, 0, .2));
+
+    #social-links {
+      display: none !important;
+      visibility: hidden;
+    }
+  }
+}
 @media (min-width: 576px) {}
 @media (min-width: 768px) {
   footer {

@@ -48,6 +48,13 @@ input[type=file] {
   padding: 50px;
 }
 
+.input-group-text {
+  background-color: #357bf7;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+}
+
 footer,
 nav {
   background-color: #fff;
@@ -91,6 +98,13 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   height: 80px;
 }
+nav .navbar-toggler {
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.5);
+}
+nav .navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
 nav a {
   color: #343a40;
   line-height: 1.5em;
@@ -119,8 +133,8 @@ input[type=url],
 input[name=email],
 textarea,
 select {
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 3px;
+  border-color: #357bf7;
+  border-width: 0 2px 0 0;
   color: #343a40;
   height: 50px;
   padding: 0 1em;
@@ -132,8 +146,17 @@ input[type=url]:focus,
 input[name=email]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid rgba(53, 123, 247, 0.5);
-  box-shadow: none;
+  border: #357bf7 2px solid;
+  outline: 0;
+}
+input[type=text]:focus-visible,
+input[type=password]:focus-visible,
+input[type=url]:focus-visible,
+input[name=email]:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border: #357bf7 2px solid;
+  outline: 0;
 }
 
 textarea {
@@ -234,6 +257,20 @@ select {
     text-align: center;
   }
 }
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background-color: #fff;
+    padding-top: 15px;
+    text-align: center;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .navbar-collapse #social-links {
+    display: none !important;
+    visibility: hidden;
+  }
+}
 @media (min-width: 768px) {
   footer p, footer ul {
     margin-bottom: 0;
@@ -272,8 +309,8 @@ section#our-partners h2 {
   color: #fff;
 }
 section .container {
-  padding-top: 50px;
   padding-bottom: 50px;
+  padding-top: 50px;
 }
 section .card-basic {
   -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

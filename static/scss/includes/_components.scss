@@ -4,16 +4,21 @@ input[type='url'],
 input[name='email'],
 textarea,
 select {
-  border: 1px solid $input-border;
-  border-radius: 3px;
+  border-color: $primary-color;
+  border-width: 0 2px 0 0;
   color: $dark-grey;
   height: 50px;
   padding: 0 1em;
   width: 100%;
 
   &:focus {
-    border: $border-light-primary;
-    box-shadow: none;
+    border: $primary-color 2px solid;
+    outline: 0;
+  }
+
+  &:focus-visible {
+    border: $primary-color 2px solid;
+    outline: 0;
   }
 }
 
