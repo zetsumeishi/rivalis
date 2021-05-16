@@ -120,3 +120,9 @@ class Match(models.Model):
 
     def __str__(self):
         return f'{self.home_team} VS {self.away_team}'
+
+
+class Achievement(models.Model):
+    position = models.PositiveSmallIntegerField()
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)

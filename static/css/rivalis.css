@@ -245,6 +245,10 @@ select {
   background: none;
 }
 
+.gold {
+  color: #fdd333;
+}
+
 @media (max-width: 767.98px) {
   footer p {
     margin-bottom: 1em;

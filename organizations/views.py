@@ -11,6 +11,7 @@ from .forms import OrganizationForm
 from .forms import TeamForm
 from .models import Organization
 from .models import Team
+from tournaments.models import Achievement
 from users.models import User
 
 
@@ -119,9 +120,11 @@ def detail_team(request, organization_id, team_id):
         id=team_id,
         organization=organization,
     )
+    team_achievements = Achievement.objects.filter(team=team)
 
     context = {
         'team': team,
+        'team_achievements': team_achievements,
         'organization': organization,
     }
     return render(request, 'teams/detail.html', context)
