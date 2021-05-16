@@ -172,6 +172,7 @@ label {
 
 select {
   -moz-appearance: none;
+  background-color: #fff;
   text-indent: 0.01px;
   text-overflow: "";
 }

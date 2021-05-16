@@ -10,7 +10,7 @@ My profile
 
 {% block content %}
 <div class="d-flex">
-  <div class="container mt-5">
+  <div class="container mt-5 mb-5">
     <div class="section-bg">
       <div class="row">
         <h2>My Profile</h2>
@@ -43,37 +43,37 @@ My profile
       </div>
       <hr>
       {% if organizations %}
-      {% for organization in organizations %}
-      <div class="row mt-3">
-        <div class="col-2">
-          <img src="{{ organization.logo.url }}" alt="{{ organization.name }}" width="100%">
-        </div>
-        <div class="col-5">
-          <p>
-            <a href="{% url 'organizations:detail_organization' organization.id %}">
-            {{ organization.name }} | {{ organization.short_name }}
-            </a>
-          </p>
-        </div>
-        <div class="col-5">
-          <h3>Teams</h3>
-          <ul class="p-0 mt-3">
-            {% for team in organization.team_set.all %}
-            <li>
-              <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="18px" class="mr-2">
-              <a href="{% url 'organizations:detail_team' team.organization.id team.id %}">
-                {{ team.name }} | {{ team.discipline.name }}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-      {% endfor %}
+        {% for organization in organizations %}
+          <div class="row mt-3">
+            <div class="col-md-12 col-lg-2">
+              <img src="{{ organization.logo.url }}" alt="{{ organization.name }}" width="100%">
+            </div>
+            <div class="col-md-12 col-lg-5">
+              <p>
+                <a href="{% url 'organizations:detail_organization' organization.id %}">
+                {{ organization.name }} | {{ organization.short_name }}
+                </a>
+              </p>
+            </div>
+            <div class="col-md-12 col-lg-5">
+              <h3>Teams</h3>
+              <ul class="p-0 mt-3">
+                {% for team in organization.team_set.all %}
+                <li>
+                  <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="18px" class="mr-2">
+                  <a href="{% url 'organizations:detail_team' team.organization.id team.id %}">
+                    {{ team.name }} | {{ team.discipline.name }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
       {% else %}
-      <div class="row mt-3">
-        <p class="text-muted"><em>You haven't joined an organization yet.</em></p>
-      </div>
+        <div class="row mt-3">
+          <p class="text-muted"><em>You haven't joined an organization yet.</em></p>
+        </div>
       {% endif %}
     </div>
     <div class="section-bg mt-3">
@@ -84,10 +84,10 @@ My profile
       {% if teams %}
       {% for team in teams %}
       <div class="row mt-3">
-        <div class="col-2">
+        <div class="col-xs-12 col-md-2">
           <img src="{{ team.logo.url }}" alt="{{ team.name }}" width="100%">
         </div>
-        <div class="col-5">
+        <div class="col-xs-12 col-md-5">
           <p>
             <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="18px" class="mr-2">
             <a href="{% url 'organizations:detail_team' team.organization.id team.id %}">
