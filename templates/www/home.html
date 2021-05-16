@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
+{% load l10n %}
 {% load static %}
+{% load tz %}
 
 {% block title %}
 Home
@@ -22,10 +24,60 @@ Home
       </div>
       <div class="carousel-item slide3">
         <div class="d-flex h-100 align-items-center justify-content-center">
-          <h2 class="caption text-center">Participate in good<br> action around the world</h2>
+          <h2 class="caption text-center">Have a real impact<br>around the world</h2>
         </div>
       </div>
     </div>
   </div>
 </header>
+<section>
+  <div class="container">
+    <div class="row">
+      <h2>Upcoming Tournaments</h2>
+    </div>
+    <div class="row">
+      {% if upcoming_tournaments %}
+        {% for tournament in upcoming_tournaments %}
+          <div class="col-3 card-basic">
+            <div class="row justify-content-center">
+              <img src="{{ tournament.organizer.logo.url }}" alt="{{ tournament.organizer }}" width="90%" height="auto">
+            </div>
+            <div class="row justify-content-center">
+              {{ tournament.name }}<br>
+              {% if request.user.is_authenticated %}
+                {% timezone request.user.timezone %}
+                  {{ tournament.start_date|date:'M d Y @ h:m' }}
+                {% endtimezone %}
+              {% else %}
+                {% timezone 'UTC' %}
+                  {{ tournament.start_date|date:'M d Y @ h:m' }}
+                {% endtimezone %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        There's currently no upcoming tournament.
+      {% endif %}
+    </div>
+  </div>
+</section>
+<section id="our-partners">
+  <div class="container">
+    <div class="row">
+      <h2>Our Partners</h2>
+    </div>
+    <div class="row justify-content-center card-basic mt-3 mb-3 p-0">
+      <div class="col-sm-12 col-md-4 mt-5 mb-5">
+        <img src="{% static 'img/partners/unicef.png'%}" alt="Unicef" width="80%" height="auto">
+      </div>
+      <div class="col-sm-12 col-md-4 mt-5 mb-5">
+        <img src="{% static 'img/partners/surf_rider.png'%}" alt="Surf Rider" width="80%" height="auto">
+      </div>
+      <div class="col-sm-12 col-md-4 mt-5 mb-5">
+        <img src="{% static 'img/partners/rotary.png'%}" alt="Rotary" width="80%" height="auto">
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

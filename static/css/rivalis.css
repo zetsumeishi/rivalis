@@ -265,6 +265,25 @@ header .caption {
   font-size: 3em;
 }
 
+section#our-partners {
+  background-color: #357bf7;
+}
+section#our-partners h2 {
+  color: #fff;
+}
+section .container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+section .card-basic {
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px;
+}
+
 #email-header {
   background-color: #357bf7;
   height: 150px;
