@@ -32,14 +32,17 @@ header {
 section {
   &#our-partners {
     background-color: $primary-color;
+
     & h2 {
       color: $white;
     }
   }
+
   & .container {
     padding-bottom: 50px;
     padding-top: 50px;
   }
+
   & .card-basic {
     @include box-shadow(0, 2px, 4px, rgb(0, 0, 0, .2));
     background-color: $white;
