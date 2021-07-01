@@ -44,13 +44,20 @@ def detail_tournament(request, tournament_id):
     tournament = Tournament.objects.get(id=tournament_id)
     matches = Match.objects.filter(round__stage__tournament=tournament)
     tournament_data = dict()
+
+    # Generate the bracket if the tournament has started and no match was created
     if not tournament.is_registration_open and matches:
         controller = BracketController(tournament)
         tournament_data = controller.build_bracket()
 
+    tournament_membership = TournamentMembership.objects.filter(
+        tournament__id=tournament.id,
+    ).order_by('status')
+
     context = {
         'tournament': tournament,
         'tournament_data': tournament_data,
+        'tournament_membership': tournament_membership,
     }
     return render(request, 'tournaments/detail.html', context)
 
