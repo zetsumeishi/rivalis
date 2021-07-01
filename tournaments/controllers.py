@@ -1,6 +1,7 @@
 from random import shuffle
 
 from .constants import SINGLE_ELIMINATION
+from .models import Achievement
 from .models import Match
 from .models import Round
 from .models import Stage
@@ -39,3 +40,20 @@ class BracketController:
             tournament_data[round] = list(matches)
 
         return tournament_data
+
+    def save_loser_results(self, position, tournament, team):
+        if position == 1:
+            position = '1st'
+        elif position == 2:
+            position = '2nd'
+        elif position == 3:
+            position = '3rd'
+        else:
+            position = f'{position}/{position * 2}th'
+
+        for player in self.members.filter(role='player'):
+            Achievement.objects.create(
+                position=position,
+                tournament=tournament,
+                team=team,
+            )

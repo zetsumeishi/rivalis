@@ -132,6 +132,6 @@ class Match(models.Model):
 
 
 class Achievement(models.Model):
-    position = models.PositiveSmallIntegerField()
+    position = models.CharField('position', max_length=255)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
