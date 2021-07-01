@@ -39,6 +39,12 @@ class TournamentForm(ModelForm):
         to_field_name='name',
         empty_label='Select an organization',
     )
+    non_profit = forms.ModelChoiceField(
+        label='Non-Profit Organization (Optional)',
+        queryset=Organization.objects.filter(is_non_profit=True),
+        to_field_name='name',
+        empty_label='Select a NPO',
+    )
     format = forms.ChoiceField(choices=STAGE_FORMAT_CHOICES)
 
     def __init__(self, *args, **kwargs):
