@@ -6,7 +6,6 @@ from .constants import SIZE_CHOICES
 from .constants import STAGE_FORMAT_CHOICES
 from .constants import STATUS_CHOICES
 from disciplines.models import Discipline
-from organizations.models import Organization
 from organizations.models import Team
 
 
@@ -32,7 +31,17 @@ class Tournament(models.Model):
 
     # Relationships
     discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE)
-    organizer = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    organizer = models.ForeignKey(
+        'organizations.Organization',
+        on_delete=models.CASCADE,
+        related_name='organizer',
+    )
+    non_profit = models.ForeignKey(
+        'organizations.Organization',
+        on_delete=models.CASCADE,
+        related_name='non_profit',
+        null=True,
+    )
     participants = models.ManyToManyField(Team, through='TournamentMembership')
 
     def __str__(self):
