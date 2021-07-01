@@ -12,79 +12,70 @@
 {% block content %}
 <div class="container mt-5">
   <div class="section-bg">
-    <div class="row">
-      <div class="col-xs-12 col-md-4">
-        <h2>{{ organization.name }}</h2>
-      </div>
-      {% if request.user == organization.owner %}
-      <div class="col-xs-12 col-md-4 offset-md-4">
-        <a href="{% url 'organizations:create_team' %}">
-          <button class="btn rivalis-button-inverted mb-3">Create team</button>
-        </a>
-        <a href="{% url 'organizations:edit_organization' organization.id %}">
-          <button class="btn rivalis-button-inverted mb-3">Edit organization</button>
-        </a>
-      </div>
-      {% endif %}
+    <div class="col-4">
+      <h2>{{ organization.name }}</h2>
+      <img src="{{ organization.logo.url }}" alt="{{ organization.name }}" width="50%">
     </div>
-    <div class="row">
-      <div class="col-8">
-        <p>{{ organization.description }}</p>
-      </div>
-      <div class="col-4">
-        <ul>
-          {% if organization.website %}
-          <li>
-            <a href="{{ organization.website }}">
-              <span class="fas fa-globe">{{ organization.website }}</span>
-            </a>
-          </li>
-          {% endif %}
-          {% if organization.twitch %}
-          <li>
-            <a href="{{ organization.twitch }}">
-              <span class="fab fa-twitch">{{ organization.twitch }}</span>
-            </a>
-          </li>
-          {% endif %}
-          {% if organization.youtube %}
-          <li>
-            <a href="{{ organization.youtube }}">
-              <span class="fab fa-youtube">{{ organization.youtube }}</span>
-            </a>
-          </li>
-          {% endif %}
-          {% if organization.instagram %}
-          <li>
-            <a href="{{ organization.instagram }}">
-              <span class="fab fa-instagram">{{ organization.instagram }}</span>
-            </a>
-          </li>
-          {% endif %}
-          {% if organization.twitter %}
-          <li>
-            <a href="{{ organization.twitter }}">
-              <span class="fab fa-twitter">{{ organization.twitter }}</span>
-            </a>
-          </li>
-          {% endif %}
-          {% if organization.reddit %}
-          <li>
-            <a href="{{ organization.reddit }}">
-              <span class="fab fa-reddit">{{ organization.reddit }}</span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
+    <div class="col-8">
+      <p>{{ organization.description }}</p>
+      <ul>
+        {% if organization.website %}
+        <li>
+          <a href="{{ organization.website }}">
+            <span class="fas fa-globe">{{ organization.website }}</span>
+          </a>
+        </li>
+        {% endif %}
+        {% if organization.twitch %}
+        <li>
+          <a href="{{ organization.twitch }}">
+            <span class="fab fa-twitch">{{ organization.twitch }}</span>
+          </a>
+        </li>
+        {% endif %}
+        {% if organization.youtube %}
+        <li>
+          <a href="{{ organization.youtube }}">
+            <span class="fab fa-youtube">{{ organization.youtube }}</span>
+          </a>
+        </li>
+        {% endif %}
+        {% if organization.instagram %}
+        <li>
+          <a href="{{ organization.instagram }}">
+            <span class="fab fa-instagram">{{ organization.instagram }}</span>
+          </a>
+        </li>
+        {% endif %}
+        {% if organization.twitter %}
+        <li>
+          <a href="{{ organization.twitter }}">
+            <span class="fab fa-twitter">{{ organization.twitter }}</span>
+          </a>
+        </li>
+        {% endif %}
+        {% if organization.reddit %}
+        <li>
+          <a href="{{ organization.reddit }}">
+            <span class="fab fa-reddit">{{ organization.reddit }}</span>
+          </a>
+        </li>
+        {% endif %}
     </div>
+    {% if request.user == organization.owner %}
+
+      <a href="{% url 'organizations:create_team' %}">
+        <button class="btn rivalis-button-inverted mb-3">Create team</button>
+      </a>
+      <a href="{% url 'organizations:edit_organization' organization.id %}">
+        <button class="btn rivalis-button-inverted mb-3">Edit organization</button>
+      </a>
+
+    {% endif %}
   </div>
   <div class="section-bg mt-3">
     {% for team in teams %}
     <div class="row mt-5">
-      <div class="col-xs-12 col-lg-2 mt-5">
-        <img src="{{ team.logo.url }}" alt="{{ team.name }}" width="100%">
-      </div>
       <div class="col-xs-12 col-lg-5 grid-justify-center">
         <h3>GAME</h3>
         <img src="{% static 'img/disciplines/' %}{{ team.discipline.slug }}_logo.svg" alt="Valorant" height="80px" class="mr-2">
