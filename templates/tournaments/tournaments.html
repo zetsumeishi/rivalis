@@ -4,55 +4,54 @@
 {% load tournament_status %}
 
 {% block title %}
-  Browse tournaments
+Browse tournaments
 {% endblock %}
 
 {% block content %}
-  <main class="flex-shrink-0">
-    <div class="container mt-5">
-      <div class="section-bg">
+<main class="flex-shrink-0">
+  <div class="container mt-5 mb-5">
+    <div class="section-bg">
+      <h2>All Tournaments</h2>
+      <div class="table-responsive-md">
         <table class="table">
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Game</th>
               <th scope="col">Size</th>
-              <th scope="col">Starting date</th>
-              <th scope="col">Organized by</th>
+              <th scope="col">Date</th>
+              <th scope="col">Organizer</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
             {% for tournament in tournaments %}
-              <tr>
-                <th scope="row">
-                  <a href="{% url 'tournaments:detail_tournament' tournament.id %}">
-                    {{tournament.name}}
-                  </a>
-                </th>
-                <td>
+            <tr>
+              <th scope="row">
+                <a href="{% url 'tournaments:detail_tournament' tournament.id %}">
                   <img src="{% static 'img/disciplines/' %}{{ tournament.discipline.slug }}_logo.svg" alt="{{ tournament.discipline.name }}" height="16px" class="mr-2">
-                  {{ tournament.discipline.name }}
-                </td>
-                <td>
-                  {{ tournament.size }}
-                </td>
-                <td>
-                  {{ tournament.start_date }}
-                </td>
-                <td>
-                  <a href="{% url 'organizations:detail_organization' tournament.organizer.id %}">
-                    {{ tournament.organizer.name }}
-                  </a>
-                </td>
-                <td>
-                  {{ tournament|tournament_status }}
-                </td>
-              </tr>
+                  {{tournament.name}}
+                </a>
+              </th>
+              <td>
+                {{ tournament.size }}
+              </td>
+              <td>
+                {{ tournament.start_date }}
+              </td>
+              <td>
+                <a href="{% url 'organizations:detail_organization' tournament.organizer.id %}">
+                  {{ tournament.organizer.name }}
+                </a>
+              </td>
+              <td>
+                {{ tournament|tournament_status }}
+              </td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
-  </main>
+  </div>
+</main>
 {% endblock %}
