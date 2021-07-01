@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Match results
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="section-bg">
+      <h2>Enter the match results</h2>
+    <hr>
+    <div class="mt-3">
+      {% include 'tournaments/includes/_match_results_form.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}

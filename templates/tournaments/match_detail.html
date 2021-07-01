@@ -9,22 +9,28 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <div class="section-bg">
+      <div class="row">
+        <div class="col">
+          <img src="{{ match.home_team.logo.url }}" alt="{{ match.home_team.name}}" height="150">
+          <p>{{ match.home_team.name }}</p>
+        </div>
+        <div class="col">
+          <h2>{{ match.home_score|default_if_none:"TBD" }}</h2>
+        </div><div class="col">
+          <h2>{{ match.away_score|default_if_none:"TBD" }}</h2>
+        </div>
+        <div class="col">
+          <img src="{{ match.away_team.logo.url }}" alt="{{ match.away_team.name}}" height="150">
+          <p>{{ match.away_team.name }}</p>
+        </div>
+    </div>
+    {% if user_is_member and not score_already_added %}
     <div class="row">
-      <div class="col">
-        <img src="{{ match.home_team.logo.url }}" alt="{{ match.home_team.name}}" height="150">
-        <p>{{ match.home_team.name }}</p>
-      </div>
-      <div class="col">
-        <h2>{{ match.home_score|default_if_none:"TBD" }}</h2>
-      </div><div class="col">
-        <h2>{{ match.away_score|default_if_none:"TBD" }}</h2>
-      </div>
-      <div class="col">
-        <img src="{{ match.away_team.logo.url }}" alt="{{ match.away_team.name}}" height="150">
-        <p>{{ match.away_team.name }}</p>
-      </div>
+      <a href="{% url 'tournaments:match_results' tournament.id match.id %}">Enter results</a>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

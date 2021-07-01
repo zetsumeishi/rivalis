@@ -34,4 +34,9 @@ urlpatterns = [
         views.match_detail,
         name='match_detail',
     ),
+    path(
+        'tournament/<int:tournament_id>/match/<int:match_id>/results',
+        views.match_results,
+        name='match_results',
+    ),
 ]

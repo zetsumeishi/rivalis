@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -8,6 +9,7 @@ from django.urls import reverse
 from .constants import ACCEPTED
 from .constants import REJECTED
 from .controllers import BracketController
+from .forms import MatchForm
 from .forms import RegistrationForm
 from .forms import TournamentForm
 from .models import Match
@@ -138,8 +140,70 @@ def accept_participant(request):
 def match_detail(request, tournament_id, match_id):
     tournament = Tournament.objects.get(id=tournament_id)
     match = Match.objects.get(id=match_id)
+
+    user_is_member = False
+    if (
+        request.user in match.home_team.members.all()
+        and request.user in match.away_team.members.all()
+    ):
+        user_is_member = True
+
+    if request.method == 'POST':
+        form = MatchForm(request.POST)
+        if form.is_valid():
+            form.save()
+            kwargs = {
+                'tournament_id': tournament_id,
+                'match_id': match_id,
+            }
+            return redirect(reverse('tournaments:match_details', kwargs=kwargs))
+        else:
+            messages.add_message(request, messages.ERROR, 'Mistakes were made')
+
+    score_already_added = match.home_score and match.away_score
+
     context = {
         'tournament': tournament,
         'match': match,
+        'user_is_member': user_is_member,
+        'score_already_added': score_already_added,
     }
+
     return render(request, 'tournaments/match_detail.html', context)
+
+
+def match_results(request, tournament_id, match_id):
+    tournament = Tournament.objects.get(id=tournament_id)
+    match = Match.objects.get(id=match_id)
+
+    if (
+        request.user not in match.home_team.members.all()
+        and request.user not in match.away_team.members.all()
+    ):
+        return HttpResponseForbidden()
+
+    if request.method == 'POST':
+        form = MatchForm(request.POST)
+        if form.is_valid():
+            form.save()
+            controller = BracketController(tournament)
+            position = Match.objects.filter(round=match.round).count()
+            if match.home_score > match.away_score:
+                controller.save_loser_results(position, tournament, match.away_team)
+            else:
+                controller.save_loser_results(position, tournament, match.home_team)
+            kwargs = {
+                'tournament_id': tournament_id,
+                'match_id': match_id,
+            }
+            return redirect(reverse('tournaments:match_details', kwargs=kwargs))
+        else:
+            messages.add_message(request, messages.ERROR, 'Mistakes were made')
+
+    form = MatchForm()
+    context = {
+        'tournament': tournament,
+        'match': match,
+        'form': form,
+    }
+    return render(request, 'tournaments/match_results.html', context)

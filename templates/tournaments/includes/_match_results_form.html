@@ -1,0 +1,19 @@
+<form method="post" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <label for="{{ form.home_score.id_for_label }}">{{ match.home_team.name }}</label>
+      {{ form.home_score }}
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="{{ form.away_score.id_for_label }}">{{ match.away_team.name }}</label>
+      {{ form.away_score }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-8 mt-4 offset-md-2">
+      <button class="btn btn-md rivalis-button-primary w-100 mb-3">Validate the score</button>
+    </div>
+  </div>
+</form>

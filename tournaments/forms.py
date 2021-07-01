@@ -5,6 +5,7 @@ from django.forms import ModelForm
 from .constants import SIZES_ROUNDS
 from .constants import STAGE_FORMAT_CHOICES
 from .constants import WAITING
+from .models import Match
 from .models import Round
 from .models import Stage
 from .models import Tournament
@@ -107,3 +108,12 @@ class RegistrationForm(Form):
             team_registration = TournamentMembership(**data)
             team_registration.save()
         return tournament
+
+
+class MatchForm(ModelForm):
+    class Meta:
+        model = Match
+        fields = [
+            'home_score',
+            'away_score',
+        ]
