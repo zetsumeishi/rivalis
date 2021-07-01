@@ -4,8 +4,7 @@ input[type='url'],
 input[name='email'],
 textarea,
 select {
-  border-color: $primary-color;
-  border-width: 0 2px 0 0;
+  border: 2px #EEE solid;
   color: $dark-grey;
   height: 50px;
   padding: 0 1em;
