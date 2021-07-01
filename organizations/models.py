@@ -7,6 +7,7 @@ from users.models import User
 class Organization(models.Model):
     name = models.CharField('Name', max_length=255)
     short_name = models.CharField('Short name', max_length=255)
+    is_non_profit = models.BooleanField(default=False)
     description = models.TextField('Description', blank=True)
     website = models.URLField('Website', blank=True)
     twitch = models.URLField('Twitch', blank=True)
